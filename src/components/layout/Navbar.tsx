@@ -71,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onRegisterClick }) => {
             href="#hero"
             onClick={(e) => handleNavClick(e as any, '#hero')}
             theme="light"
-            size="md"
+            size="sm"
           />
 
           {/* Desktop Navigation Links */}

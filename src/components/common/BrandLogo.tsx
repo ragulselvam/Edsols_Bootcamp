@@ -2,10 +2,11 @@ import React from 'react';
 
 export interface BrandLogoProps {
   theme?: 'light' | 'dark';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   showTagline?: boolean;
   variant?: 'full' | 'emblem';
   className?: string;
+  imgClassName?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement>) => void;
   href?: string;
 }
@@ -16,15 +17,17 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showTagline = true,
   variant = 'full',
   className = '',
+  imgClassName = '',
   onClick,
   href,
 }) => {
   const isDark = theme === 'dark';
 
   const sizeClasses = {
-    sm: variant === 'emblem' ? 'h-8 w-8' : 'h-8 sm:h-9',
-    md: variant === 'emblem' ? 'h-10 sm:h-11' : 'h-10 sm:h-12',
-    lg: variant === 'emblem' ? 'h-12 w-12' : 'h-14 sm:h-16',
+    xs: variant === 'emblem' ? 'h-5 w-5' : 'h-5 sm:h-6',
+    sm: variant === 'emblem' ? 'h-7 w-7' : 'h-6 sm:h-7',
+    md: variant === 'emblem' ? 'h-9 sm:h-10' : 'h-8 sm:h-9',
+    lg: variant === 'emblem' ? 'h-11 w-11 sm:h-12 sm:w-12' : 'h-10 sm:h-12',
   }[size];
 
   const logoSrc = variant === 'emblem'
@@ -42,7 +45,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       <img
         src={logoSrc}
         alt="EDSOLS Innovations - Robotics | IoT | AI"
-        className={`${sizeClasses} w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm`}
+        className={`${imgClassName || sizeClasses} w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm`}
         loading="eager"
       />
     </div>

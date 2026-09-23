@@ -44,6 +44,19 @@ export const App: React.FC = () => {
       {/* Background Circuit & Glow Matrix */}
       <CircuitBackground />
 
+      {/* Background EDSOLS Emblem Watermark: starts below Register Now button, cut 20% from right, rotated 20deg to right, zoomed out another 10% */}
+      <div
+        className="fixed top-20 sm:top-[84px] right-0 pointer-events-none select-none z-10 overflow-hidden"
+        aria-hidden="true"
+      >
+        <img
+          src="/edsols-emblem.png"
+          alt=""
+          className="w-[208px] h-[208px] sm:w-[260px] sm:h-[260px] md:w-[356px] md:h-[356px] lg:w-[438px] lg:h-[438px] xl:w-[500px] xl:h-[500px] object-contain translate-x-[20%] rotate-[20deg] opacity-20 sm:opacity-25 filter drop-shadow-sm transition-transform duration-500"
+          loading="eager"
+        />
+      </div>
+
       {/* Sticky Top Navigation */}
       <Navbar onRegisterClick={handleRegisterClick} />
 
