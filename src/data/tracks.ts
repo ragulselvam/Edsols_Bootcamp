@@ -31,7 +31,7 @@ export const learningTracks: LearningTrack[] = [
     badge: "Hardware & Mechanics",
     hardwareName: "16-in-1 Building:bit Super Kit",
     hardwareKitId: "robotics-kit",
-    hardwareImageUrl: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/Superkit-Yahboom-_1.jpg?v=1684313735",
+    hardwareImageUrl: "/building-bit-robot.jpg",
     topics: [
       "Robotics fundamentals & kinematics",
       "Mechanical construction & gear assemblies",

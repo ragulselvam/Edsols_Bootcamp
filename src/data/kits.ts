@@ -31,8 +31,8 @@ export const hardwareKits: HardwareKit[] = [
     manufacturer: "EDSOLS Lab",
     tagline: "Precision Mechanical Engineering & Programmable Micro:bit Robotics",
     badge: "Track 01 Core Hardware",
-    image: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/Superkit-Yahboom-_1.jpg?v=1684313735",
-    fallbackImage: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/Superkit-Yahboom-_1.jpg?v=1684313735",
+    image: "/building-bit-robot.jpg",
+    fallbackImage: "/building-bit-robot.jpg",
     referenceUrl: "",
     overview: "An all-in-one STEM robotics kit combining 350+ precision Lego-compatible building blocks, the Super:bit multi-functional motor expansion board, ultrasonic distance sensor, infrared tracking module, and RGB lighting. Students construct and program 16+ creative robotic structures including rovers, robotic limbs, forklifts, obstacle-avoiding cars, and automatic gates.",
     specs: [
