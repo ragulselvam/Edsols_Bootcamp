@@ -111,8 +111,8 @@ export const hardwareKits: HardwareKit[] = [
     manufacturer: "EDSOLS Lab",
     tagline: "Edge AI, OpenCV Computer Vision & Kinematic Manipulation",
     badge: "Track 03 Core Hardware",
-    image: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/DOFBOT-PI-_1.jpg?v=1684314188",
-    fallbackImage: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/DOFBOT-PI-_1.jpg?v=1684314188",
+    image: "/dofbot-robotic-arm.jpg",
+    fallbackImage: "/dofbot-robotic-arm.jpg",
     referenceUrl: "",
     overview: "An industrial-grade 6-DOF all-aluminum robotic arm powered by high-torque digital bus servos and an HD AI camera. Features real-time OpenCV computer vision, forward and inverse kinematics algorithms, color tracking, gesture mimicry, face recognition, and ROS2 Python SDK integration.",
     specs: [

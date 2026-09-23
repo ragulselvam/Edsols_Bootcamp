@@ -97,7 +97,7 @@ export const learningTracks: LearningTrack[] = [
     badge: "Computer Vision & Kinematics",
     hardwareName: "DOFBOT AI Robotic Arm",
     hardwareKitId: "ai-kit",
-    hardwareImageUrl: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/DOFBOT-PI-_1.jpg?v=1684314188",
+    hardwareImageUrl: "/dofbot-robotic-arm.jpg",
     topics: [
       "AI & Machine Learning fundamentals",
       "OpenCV Computer Vision concepts",
