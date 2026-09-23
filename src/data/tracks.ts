@@ -64,7 +64,7 @@ export const learningTracks: LearningTrack[] = [
     badge: "Connected Devices & Automation",
     hardwareName: "World of Module Sensor Suite",
     hardwareKitId: "iot-kit",
-    hardwareImageUrl: "https://cdn.shopify.com/s/files/1/0066/9686/1780/products/1_f3ce7858-a59f-499e-8aa1-267ecf932afb.jpg?v=1667217844",
+    hardwareImageUrl: "/sensor-module-robot.jpg",
     topics: [
       "Internet of Things architecture",
       "Smart devices & microcontrollers",

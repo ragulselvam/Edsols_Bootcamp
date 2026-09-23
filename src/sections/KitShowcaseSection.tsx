@@ -86,15 +86,15 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                   </p>
                 </div>
 
-                {/* Product Image Frame */}
-                <div className="relative my-5 h-52 rounded-2xl bg-slate-50/80 border border-slate-200/80 p-4 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300">
+                {/* Product Image Frame with 100% clean fitting */}
+                <div className="relative my-5 h-56 rounded-2xl bg-slate-50/80 border border-slate-200/80 p-3 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300">
                   <img
                     src={kit.image}
                     alt={kit.fullName}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = kit.fallbackImage;
                     }}
-                    className="max-h-full max-w-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
                 </div>
@@ -168,11 +168,11 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
           <div className="space-y-6">
             {/* Top Grid: Image + Overview */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-              <div className="h-64 rounded-2xl bg-slate-50 border border-slate-200 p-4 flex items-center justify-center">
+              <div className="h-72 rounded-2xl bg-slate-50 border border-slate-200 p-3 flex items-center justify-center overflow-hidden">
                 <img
                   src={activeKitModal.image}
                   alt={activeKitModal.fullName}
-                  className="max-h-full max-w-full object-contain drop-shadow-md"
+                  className="w-full h-full object-contain drop-shadow-md"
                 />
               </div>
 

@@ -71,8 +71,8 @@ export const hardwareKits: HardwareKit[] = [
     manufacturer: "EDSOLS Lab",
     tagline: "Connected Sensor Networks, Smart Home & Environmental IoT Telemetry",
     badge: "Track 02 Core Hardware",
-    image: "https://cdn.shopify.com/s/files/1/0066/9686/1780/products/1_f3ce7858-a59f-499e-8aa1-267ecf932afb.jpg?v=1667217844",
-    fallbackImage: "https://cdn.shopify.com/s/files/1/0066/9686/1780/products/1_f3ce7858-a59f-499e-8aa1-267ecf932afb.jpg?v=1667217844",
+    image: "/sensor-module-robot.jpg",
+    fallbackImage: "/sensor-module-robot.jpg",
     referenceUrl: "",
     overview: "An extensive physical Internet-of-Things suite packed with over 20+ sensor modules, including RFID smart locks, PIR human motion detectors, flame & gas sensors, sound & light sensors, soil moisture telemetry, OLED display, and relay controllers. Enables students to build real smart home and connected city prototypes.",
     specs: [
