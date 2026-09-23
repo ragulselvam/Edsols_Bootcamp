@@ -36,7 +36,6 @@ export const OverviewSection: React.FC = () => {
             <GlowingCard
               key={stat.number}
               glowColor={glowColorMap[stat.number] || 'blue'}
-              techCorners
               className="p-6 sm:p-7 group flex flex-col justify-between bg-white border border-slate-200/90 shadow-edsols-card"
             >
               <div>

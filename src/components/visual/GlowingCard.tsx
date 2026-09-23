@@ -13,7 +13,6 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
   children,
   className = '',
   glowColor = 'blue',
-  techCorners = false,
   interactive = true,
   onClick,
 }) => {
@@ -30,7 +29,7 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
       onClick={onClick}
       className={`relative rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-edsols-card transition-all duration-300 ${
         interactive ? 'hover:-translate-y-1 ' + glowStyles[glowColor] : ''
-      } ${techCorners ? 'tech-border-corner' : ''} ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      } ${onClick ? 'cursor-pointer' : ''} ${className}`}
     >
       {/* Subtle top glare highlight */}
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent pointer-events-none rounded-t-2xl" />

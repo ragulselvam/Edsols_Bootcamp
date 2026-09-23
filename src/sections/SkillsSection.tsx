@@ -59,7 +59,6 @@ export const SkillsSection: React.FC = () => {
             <GlowingCard
               key={skill.id}
               glowColor="blue"
-              techCorners
               className="p-5 sm:p-6 group flex flex-col justify-between bg-white border border-slate-200/90 shadow-edsols-card transition-all duration-300"
             >
               <div>
