@@ -29,7 +29,7 @@ export const learningTracks: LearningTrack[] = [
     accentBorder: "border-pink-500/40 hover:border-pink-500",
     accentGlow: "group-hover:shadow-[0_0_30px_rgba(244,63,94,0.35)]",
     badge: "Hardware & Mechanics",
-    hardwareName: "Yahboom 16-in-1 Building:bit Super Kit",
+    hardwareName: "16-in-1 Building:bit Super Kit",
     hardwareKitId: "robotics-kit",
     hardwareImageUrl: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/Superkit-Yahboom-_1.jpg?v=1684313735",
     topics: [
@@ -62,7 +62,7 @@ export const learningTracks: LearningTrack[] = [
     accentBorder: "border-cyan-500/40 hover:border-cyan-500",
     accentGlow: "group-hover:shadow-[0_0_30px_rgba(6,182,212,0.35)]",
     badge: "Connected Devices & Automation",
-    hardwareName: "Yahboom World of Module Sensor Suite",
+    hardwareName: "World of Module Sensor Suite",
     hardwareKitId: "iot-kit",
     hardwareImageUrl: "https://cdn.shopify.com/s/files/1/0066/9686/1780/products/1_f3ce7858-a59f-499e-8aa1-267ecf932afb.jpg?v=1667217844",
     topics: [
@@ -95,7 +95,7 @@ export const learningTracks: LearningTrack[] = [
     accentBorder: "border-fuchsia-500/40 hover:border-fuchsia-500",
     accentGlow: "group-hover:shadow-[0_0_30px_rgba(217,70,239,0.35)]",
     badge: "Computer Vision & Kinematics",
-    hardwareName: "Yahboom DOFBOT AI Robotic Arm",
+    hardwareName: "DOFBOT AI Robotic Arm",
     hardwareKitId: "ai-kit",
     hardwareImageUrl: "https://cdn.shopify.com/s/files/1/0066/9686/1780/files/DOFBOT-PI-_1.jpg?v=1684314188",
     topics: [

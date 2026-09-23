@@ -50,7 +50,7 @@ export const learningJourney: WeekJourney[] = [
       "Dual infrared optical line patrol algorithms",
     ],
     handsOnActivities: [
-      "Building the Yahboom Super Kit autonomous rover chassis",
+      "Building the 16-in-1 Super Kit autonomous rover chassis",
       "Programming smooth differential steering & evasive turns",
       "Competing in a time-trial line-following challenge track",
     ],
@@ -72,7 +72,7 @@ export const learningJourney: WeekJourney[] = [
       "Robotic arm coordinate spaces and 6-axis servo kinematics",
     ],
     handsOnActivities: [
-      "Building the Keyestudio Smart Home automated security lock & alarm",
+      "Building the Smart Home automated security lock & alarm system",
       "Configuring live environmental monitoring with OLED display",
       "Setting up OpenCV video capture on the DOFBOT robotic arm",
     ],

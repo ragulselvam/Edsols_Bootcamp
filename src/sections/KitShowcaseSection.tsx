@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, CheckCircle2, ChevronRight, Zap, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { Layers, CheckCircle2, ChevronRight, Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { Modal } from '../components/common/Modal';
 import { Button } from '../components/common/Button';
@@ -66,30 +66,28 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
           {displayedKits.map((kit) => (
             <div
               key={kit.id}
-              className="group relative rounded-3xl bg-white border border-slate-200/90 hover:border-rose-300 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-edsols-card hover:shadow-xl hover:shadow-rose-500/10"
+              className="group relative rounded-3xl bg-white border border-slate-200/90 hover:border-rose-300 p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-edsols-card hover:shadow-xl hover:shadow-rose-500/10"
             >
-              <div>
-                {/* Badge & Manufacturer */}
+              <div className="flex flex-col">
+                {/* Badge */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3 py-1 rounded-full border border-rose-200">
+                  <span className="text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3.5 py-1 rounded-full border border-rose-200 shadow-sm">
                     {kit.badge}
-                  </span>
-                  <span className="text-xs font-mono text-slate-500 font-semibold">
-                    {kit.manufacturer}
                   </span>
                 </div>
 
-                {/* Product Title */}
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-rose-600 transition-colors">
-                  {kit.name}
-                </h3>
-
-                <p className="text-xs text-slate-500 font-mono mt-1 font-semibold">
-                  {kit.tagline}
-                </p>
+                {/* Product Title & Tagline with fixed height alignment */}
+                <div className="min-h-[76px] flex flex-col justify-start">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug group-hover:text-rose-600 transition-colors">
+                    {kit.name}
+                  </h3>
+                  <p className="text-xs text-slate-500 font-mono mt-1 font-semibold leading-relaxed line-clamp-2">
+                    {kit.tagline}
+                  </p>
+                </div>
 
                 {/* Product Image Frame */}
-                <div className="relative my-6 h-56 rounded-2xl bg-slate-50 border border-slate-200/80 p-4 flex items-center justify-center overflow-hidden group-hover:border-rose-300 transition-all">
+                <div className="relative my-5 h-52 rounded-2xl bg-slate-50/80 border border-slate-200/80 p-4 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300">
                   <img
                     src={kit.image}
                     alt={kit.fullName}
@@ -104,22 +102,24 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                   </span>
                 </div>
 
-                {/* Hardware Feature Highlights */}
-                <div className="space-y-2.5">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block">
+                {/* Hardware Feature Highlights with consistent min-height */}
+                <div className="flex flex-col">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2.5">
                     Core Engineering Modules:
                   </span>
-                  {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
-                      <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
+                  <div className="space-y-2.5 min-h-[148px] flex flex-col justify-start">
+                    {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-medium leading-relaxed">
+                        <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               {/* Product Actions */}
-              <div className="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between gap-3">
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
                 <button
                   onClick={() => setActiveKitModal(kit)}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
@@ -165,7 +165,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
           isOpen={!!activeKitModal}
           onClose={() => setActiveKitModal(null)}
           title={activeKitModal.fullName}
-          badgeText={`${activeKitModal.track} Platform · ${activeKitModal.manufacturer}`}
+          badgeText={`${activeKitModal.track} Platform · Hands-On Hardware`}
           maxWidth="4xl"
         >
           <div className="space-y-6">
@@ -212,7 +212,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                         {comp.category}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-600 mt-1">{comp.description}</p>
+                    <p className="text-xs text-slate-600 mt-1 leading-relaxed">{comp.description}</p>
                   </div>
                 ))}
               </div>
@@ -225,7 +225,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {activeKitModal.whatStudentsLearn.map((item, idx) => (
-                  <li key={idx} className="text-xs text-slate-700 font-medium flex items-start gap-1.5">
+                  <li key={idx} className="text-xs text-slate-700 font-medium flex items-start gap-1.5 leading-relaxed">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -234,34 +234,20 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
             </div>
 
             {/* Footer buttons */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
-              {activeKitModal.referenceUrl ? (
-                <a
-                  href={activeKitModal.referenceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-slate-500 hover:text-rose-600 transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>View Official {activeKitModal.manufacturer} Product Page</span>
-                </a>
-              ) : <div />}
-
-              <div className="flex items-center gap-3">
-                <Button variant="outline" size="sm" onClick={() => setActiveKitModal(null)}>
-                  Close
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => {
-                    setActiveKitModal(null);
-                    onRegisterClick();
-                  }}
-                >
-                  Register For This Program
-                </Button>
-              </div>
+            <div className="flex flex-wrap items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <Button variant="outline" size="sm" onClick={() => setActiveKitModal(null)}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  setActiveKitModal(null);
+                  onRegisterClick();
+                }}
+              >
+                Register For This Program
+              </Button>
             </div>
           </div>
         </Modal>

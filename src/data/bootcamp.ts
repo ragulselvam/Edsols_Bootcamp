@@ -98,7 +98,7 @@ export const bootcampData: BootcampInfo = {
     },
     {
       question: "What hardware kits will students work with during the bootcamp?",
-      answer: "Students work with 100% genuine industrial and educational hardware: the Yahboom Building Super Kit for robotics, the Keyestudio Smart Home Kit for IoT automation, and the Yahboom DOFBOT 6-DOF AI Robotic Arm with high-def vision cameras.",
+      answer: "Students work with 100% genuine industrial and educational hardware: the 16-in-1 Building Super Kit for robotics, the World of Module Smart Home Kit for IoT automation, and the DOFBOT 6-DOF AI Robotic Arm with high-def vision cameras.",
       category: "Hardware",
     },
     {
