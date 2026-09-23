@@ -97,9 +97,6 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                     className="max-h-full max-w-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <span className="absolute bottom-2 right-3 font-mono text-[9px] text-slate-400 font-bold tracking-wider">
-                    {kit.track.toUpperCase()}_STATION_01
-                  </span>
                 </div>
 
                 {/* Hardware Feature Highlights with consistent min-height */}
