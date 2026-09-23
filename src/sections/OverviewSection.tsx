@@ -60,11 +60,6 @@ export const OverviewSection: React.FC = () => {
                   {stat.detail}
                 </p>
               </div>
-
-              <div className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                <span className="font-semibold text-slate-500">MODULE // VERIFIED</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-rose-500 group-hover:animate-ping" />
-              </div>
             </GlowingCard>
           ))}
         </div>
