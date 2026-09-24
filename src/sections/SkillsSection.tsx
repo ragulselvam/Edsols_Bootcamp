@@ -24,7 +24,6 @@ import { BrandLogo } from '../components/common/BrandLogo';
 import { skillsData } from '../data/skills';
 
 export const SkillsSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'all' | 'technical' | 'cognitive' | 'collaborative'>('all');
   const [isPlaying, setIsPlaying] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -44,19 +43,13 @@ export const SkillsSection: React.FC = () => {
     Layers: <Layers className="w-5 h-5 text-rose-600" />,
   };
 
-  // Filter skills by category
-  const filteredSkills =
-    activeTab === 'all'
-      ? skillsData
-      : skillsData.filter((s) => s.category.toLowerCase() === activeTab.toLowerCase());
-
-  const N = filteredSkills.length;
+  const N = skillsData.length;
 
   // Infinite wrapping carousel items (3 duplicate sets)
   const isInfinite = N > 1;
   const virtualSkills = isInfinite
-    ? [...filteredSkills, ...filteredSkills, ...filteredSkills]
-    : filteredSkills;
+    ? [...skillsData, ...skillsData, ...skillsData]
+    : skillsData;
 
   // Virtual index in the middle set (starts at N)
   const [virtualIndex, setVirtualIndex] = useState(isInfinite ? N : 0);
@@ -77,13 +70,6 @@ export const SkillsSection: React.FC = () => {
   // Real current active index (0 to N - 1)
   const realCurrentIndex = isInfinite ? virtualIndex % N : 0;
 
-  // Reset virtualIndex when category tab changes
-  useEffect(() => {
-    setVirtualIndex(isInfinite ? N : 0);
-    setDragOffset(0);
-    setEnableTransition(true);
-  }, [activeTab, N, isInfinite]);
-
   // Dimension measurement on mount and window resize
   const updateDimensions = useCallback(() => {
     if (containerRef.current) {
@@ -102,7 +88,7 @@ export const SkillsSection: React.FC = () => {
       clearTimeout(timeout);
       window.removeEventListener('resize', updateDimensions);
     };
-  }, [updateDimensions, activeTab, N]);
+  }, [updateDimensions, N]);
 
   // Dynamic gap between cards
   const gap = containerWidth >= 1024 ? 28 : containerWidth >= 640 ? 20 : 16;
@@ -251,28 +237,6 @@ export const SkillsSection: React.FC = () => {
           highlightText="BEYOND THE CLASSROOM"
           subtitle="We cultivate the technical rigor, computational intuition, and collaborative habits demanded by premier global universities and high-growth engineering careers."
         />
-
-        {/* Centered Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-6 mx-auto">
-          {[
-            { id: 'all', label: `All Competencies (${skillsData.length})` },
-            { id: 'technical', label: 'Technical Mastery' },
-            { id: 'cognitive', label: 'Cognitive & Problem Solving' },
-            { id: 'collaborative', label: 'Leadership & Collaboration' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                activeTab === tab.id
-                  ? 'bg-rose-600 text-white shadow-md shadow-rose-500/25 border border-rose-500'
-                  : 'bg-white text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 shadow-sm'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* ========================================================================= */}
@@ -402,7 +366,7 @@ export const SkillsSection: React.FC = () => {
 
           {/* Pagination Indicators */}
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm max-w-[80vw] overflow-x-auto">
-            {filteredSkills.map((_, idx) => (
+            {skillsData.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleGoToRealIndex(idx)}
@@ -418,7 +382,7 @@ export const SkillsSection: React.FC = () => {
 
           {/* Slide Index Counter */}
           <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2.5 py-1 rounded-full border border-slate-200 shadow-sm">
-            {String(realCurrentIndex + 1).padStart(2, '0')} / {String(filteredSkills.length).padStart(2, '0')}
+            {String(realCurrentIndex + 1).padStart(2, '0')} / {String(skillsData.length).padStart(2, '0')}
           </span>
         </div>
       </div>
