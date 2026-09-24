@@ -426,11 +426,8 @@ export const SkillsSection: React.FC = () => {
             {/* Visual Credential Badge */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
               <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-rose-500/5 text-center flex flex-col items-center max-w-xs w-full">
-                <div className="mb-3 sm:mb-4">
+                <div className="mb-2 sm:mb-3">
                   <BrandLogo theme="light" size="sm" showTagline={false} />
-                </div>
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center mb-2 sm:mb-2.5 shadow-xs">
-                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-rose-600" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-slate-900">
                   Official Innovation Credential
