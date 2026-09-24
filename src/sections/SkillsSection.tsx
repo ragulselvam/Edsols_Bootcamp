@@ -106,33 +106,33 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Certificate of Completion Showcase Banner */}
-        <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-800 p-8 sm:p-12 shadow-xl overflow-hidden text-white">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-rose-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative rounded-3xl bg-gradient-to-r from-white via-rose-50/30 to-white border border-slate-200/90 p-8 sm:p-12 shadow-edsols-card hover:shadow-xl transition-all duration-300 overflow-hidden text-slate-900">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
               <div className="flex items-center gap-2">
-                <Award className="w-6 h-6 text-rose-400" />
-                <span className="text-xs font-mono uppercase tracking-widest text-rose-300 font-bold">
+                <Award className="w-6 h-6 text-rose-600" />
+                <span className="text-xs font-mono uppercase tracking-widest text-rose-600 font-bold">
                   Official Credentialing & Verified Portfolio
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
                 Official EDSOLS Bootcamp Certificate of Completion
               </h3>
 
-              <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">
+              <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
                 Graduates receive an official, cryptographically verifiable certificate detailing their completed engineering hours, mastery across Robotics, IoT, and Computer Vision, and their Demo Day capstone invention score.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono text-slate-300">
-                <span className="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
-                  <ShieldCheck className="w-4 h-4 text-rose-400" />
+              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono text-slate-700">
+                <span className="flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-xs font-medium">
+                  <ShieldCheck className="w-4 h-4 text-rose-600" />
                   Verified Engineering Portfolio
                 </span>
-                <span className="flex items-center gap-1.5 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
-                  <ShieldCheck className="w-4 h-4 text-rose-400" />
+                <span className="flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-xs font-medium">
+                  <ShieldCheck className="w-4 h-4 text-rose-600" />
                   Demonstrated Hardware Fluency
                 </span>
               </div>
@@ -140,20 +140,20 @@ export const SkillsSection: React.FC = () => {
 
             {/* Visual Credential Badge */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
-              <div className="p-6 rounded-2xl bg-slate-800/90 border border-rose-500/30 shadow-2xl text-center flex flex-col items-center max-w-xs w-full">
+              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-rose-500/5 text-center flex flex-col items-center max-w-xs w-full">
                 <div className="mb-4">
-                  <BrandLogo theme="dark" size="sm" showTagline={false} />
+                  <BrandLogo theme="light" size="sm" showTagline={false} />
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 border border-rose-500/40 flex items-center justify-center mb-2">
-                  <Award className="w-6 h-6 text-rose-400" />
+                <div className="w-12 h-12 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center mb-2.5 shadow-xs">
+                  <Award className="w-6 h-6 text-rose-600" />
                 </div>
-                <span className="text-sm font-bold text-white">
+                <span className="text-sm font-bold text-slate-900">
                   Official Innovation Credential
                 </span>
-                <span className="text-xs text-slate-400 font-mono mt-1">
+                <span className="text-xs text-slate-500 font-mono mt-1">
                   Robotics · IoT · AI Mastery
                 </span>
-                <span className="mt-3 inline-block text-[10px] font-mono text-rose-300 bg-rose-500/15 px-2.5 py-1 rounded-full border border-rose-500/30 font-bold">
+                <span className="mt-3 inline-block text-[10px] font-mono text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200 font-bold shadow-xs">
                   ISSUED AT DEMO DAY
                 </span>
               </div>

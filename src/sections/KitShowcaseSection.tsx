@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { Layers, CheckCircle2, ChevronRight, Zap, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import {
+  Layers,
+  CheckCircle2,
+  ChevronRight,
+  Zap,
+  Play,
+  Pause,
+} from 'lucide-react';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { Modal } from '../components/common/Modal';
 import { Button } from '../components/common/Button';
@@ -15,20 +22,223 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
 }) => {
   const [activeKitModal, setActiveKitModal] = useState<HardwareKit | null>(null);
   const [activeTab, setActiveTab] = useState<'all' | 'robotics' | 'iot' | 'ai'>('all');
-  const [showAll, setShowAll] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const filteredKits = activeTab === 'all'
-    ? hardwareKits
-    : hardwareKits.filter((k) => k.track.toLowerCase() === activeTab);
+  // Filtered kits based on active category tab (showing all 6 hardware platforms)
+  const filteredKits =
+    activeTab === 'all'
+      ? hardwareKits
+      : hardwareKits.filter((k) => k.track.toLowerCase() === activeTab);
 
-  const displayedKits = showAll ? filteredKits : filteredKits.slice(0, 3);
+  const N = filteredKits.length;
+
+  // Virtual items array for infinite wrapping carousel (3 sets: left buffer, center set, right buffer)
+  const isInfinite = N > 1;
+  const virtualKits = isInfinite
+    ? [...filteredKits, ...filteredKits, ...filteredKits]
+    : filteredKits;
+
+  // Active virtual index in the middle set (starts at N)
+  const [virtualIndex, setVirtualIndex] = useState(isInfinite ? N : 0);
+  const [enableTransition, setEnableTransition] = useState(true);
+
+  // Drag / Swipe State
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+
+  // Container & Card dimensions for dead-center alignment
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [cardWidth, setCardWidth] = useState(0);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardMeasureRef = useRef<HTMLDivElement>(null);
+
+  // Real current kit index (0 to N - 1)
+  const realCurrentIndex = isInfinite ? virtualIndex % N : 0;
+
+  // Reset virtualIndex when category tab changes
+  useEffect(() => {
+    setVirtualIndex(isInfinite ? N : 0);
+    setDragOffset(0);
+    setEnableTransition(true);
+  }, [activeTab, N, isInfinite]);
+
+  // Dimension measurement on mount and resize
+  const updateDimensions = useCallback(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.clientWidth);
+    }
+    if (cardMeasureRef.current) {
+      setCardWidth(cardMeasureRef.current.offsetWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    updateDimensions();
+    const timeout = setTimeout(updateDimensions, 80);
+    window.addEventListener('resize', updateDimensions);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, [updateDimensions, activeTab, N]);
+
+  // Dynamic gap between vertical cards
+  const gap = containerWidth >= 1024 ? 28 : containerWidth >= 640 ? 20 : 16;
+
+  // Symmetrical dead-center formula:
+  // translateX = (containerWidth - cardWidth) / 2 - virtualIndex * (cardWidth + gap) + dragOffset
+  const translateX =
+    containerWidth > 0 && cardWidth > 0
+      ? (containerWidth - cardWidth) / 2 - virtualIndex * (cardWidth + gap) + dragOffset
+      : 0;
+
+  // Handle infinite loop boundary resets silently without transition jump
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // Only react to the transform transition of the track itself, not bubbling child transitions
+    if (e.target !== e.currentTarget || e.propertyName !== 'transform') return;
+    if (!isInfinite) return;
+
+    // If we reached right buffer (virtualIndex >= 2 * N), snap silently back to center set
+    if (virtualIndex >= 2 * N) {
+      setEnableTransition(false);
+      setVirtualIndex((prev) => prev - N);
+    }
+    // If we reached left buffer (virtualIndex < N), snap silently to center set
+    else if (virtualIndex < N) {
+      setEnableTransition(false);
+      setVirtualIndex((prev) => prev + N);
+    }
+  };
+
+  // Re-enable CSS transitions right after silent snap
+  useEffect(() => {
+    if (!enableTransition) {
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setEnableTransition(true);
+        });
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [enableTransition]);
+
+  // Autoplay (every 7 seconds)
+  useEffect(() => {
+    if (
+      !isPlaying ||
+      isHovered ||
+      isDragging ||
+      activeKitModal !== null ||
+      N <= 1
+    ) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setVirtualIndex((prev) => prev + 1);
+    }, 7000);
+
+    return () => clearInterval(timer);
+  }, [isPlaying, isHovered, isDragging, activeKitModal, N]);
+
+  const handleNext = () => {
+    if (N <= 1) return;
+    setVirtualIndex((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    if (N <= 1) return;
+    setVirtualIndex((prev) => prev - 1);
+  };
+
+  const handleGoToRealIndex = (targetRealIndex: number) => {
+    if (!isInfinite) {
+      setVirtualIndex(targetRealIndex);
+      return;
+    }
+    const currentReal = virtualIndex % N;
+    const diff = targetRealIndex - currentReal;
+    setVirtualIndex(virtualIndex + diff);
+  };
+
+  // Touch Swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setDragStartX(e.touches[0].clientX);
+    setDragOffset(0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || dragStartX === null) return;
+    const diff = e.touches[0].clientX - dragStartX;
+    setDragOffset(diff);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    if (dragOffset < -40) {
+      handleNext();
+    } else if (dragOffset > 40) {
+      handlePrev();
+    }
+    setIsDragging(false);
+    setDragStartX(null);
+    setDragOffset(0);
+  };
+
+  // Mouse Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('button, a')) return;
+    setIsDragging(true);
+    setDragStartX(e.clientX);
+    setDragOffset(0);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || dragStartX === null) return;
+    const diff = e.clientX - dragStartX;
+    setDragOffset(diff);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    if (dragOffset < -40) {
+      handleNext();
+    } else if (dragOffset > 40) {
+      handlePrev();
+    }
+    setIsDragging(false);
+    setDragStartX(null);
+    setDragOffset(0);
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      if (dragOffset < -40) {
+        handleNext();
+      } else if (dragOffset > 40) {
+        handlePrev();
+      }
+      setIsDragging(false);
+      setDragStartX(null);
+      setDragOffset(0);
+    }
+    setIsHovered(false);
+  };
 
   return (
-    <section id="kits" className="relative py-24 sm:py-32 bg-white/80 border-t border-slate-200/80 overflow-hidden">
-      {/* Background Lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-radial from-rose-100/35 via-transparent to-transparent blur-3xl pointer-events-none" />
+    <section
+      id="kits"
+      className="relative py-16 sm:py-24 bg-white/80 border-t border-slate-200/80 w-full overflow-hidden"
+    >
+      {/* Background Lighting & Glow Ambience */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-radial from-rose-100/40 via-transparent to-transparent blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Header Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-10 text-center">
         <SectionHeader
           badgeText="Tangible Engineering Hardware"
           badgeVariant="blue"
@@ -37,8 +247,8 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
           subtitle="No simulations. No passive learning. Students work hands-on with industrial-grade microcontrollers, 6-DOF robotic limbs, sensors, and IoT automation kits."
         />
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        {/* Centered Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-6 mx-auto">
           {[
             { id: 'all', label: 'All Hardware Kits' },
             { id: 'robotics', label: 'Robotics Kits' },
@@ -50,7 +260,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
               onClick={() => {
                 setActiveTab(tab.id as any);
               }}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                 activeTab === tab.id
                   ? 'bg-rose-600 text-white shadow-md shadow-rose-500/25 border border-rose-500'
                   : 'bg-white text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 shadow-sm'
@@ -60,103 +270,184 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
             </button>
           ))}
         </div>
-
-        {/* Product Showcase Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedKits.map((kit) => (
-            <div
-              key={kit.id}
-              className="group relative rounded-3xl bg-white border border-slate-200/90 hover:border-rose-300 p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-edsols-card hover:shadow-xl hover:shadow-rose-500/10"
-            >
-              <div className="flex flex-col">
-                {/* Badge */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3.5 py-1 rounded-full border border-rose-200 shadow-sm">
-                    {kit.badge}
-                  </span>
-                </div>
-
-                {/* Product Title & Tagline with fixed height alignment */}
-                <div className="min-h-[76px] flex flex-col justify-start">
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug group-hover:text-rose-600 transition-colors">
-                    {kit.name}
-                  </h3>
-                  <p className="text-xs text-slate-500 font-mono mt-1 font-semibold leading-relaxed line-clamp-2">
-                    {kit.tagline}
-                  </p>
-                </div>
-
-                {/* Product Image Frame with 100% clean fitting */}
-                <div className="relative my-5 h-56 rounded-2xl bg-slate-50/80 border border-slate-200/80 p-3 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300">
-                  <img
-                    src={kit.image}
-                    alt={kit.fullName}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = kit.fallbackImage;
-                    }}
-                    className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Hardware Feature Highlights with consistent min-height */}
-                <div className="flex flex-col">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2.5">
-                    Core Engineering Modules:
-                  </span>
-                  <div className="space-y-2.5 min-h-[148px] flex flex-col justify-start">
-                    {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-medium leading-relaxed">
-                        <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Product Actions */}
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
-                <button
-                  onClick={() => setActiveKitModal(kit)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
-                >
-                  <span>FULL SPECIFICATIONS</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onRegisterClick}
-                  className="text-xs"
-                >
-                  Join Bootcamp
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Show More / Show Fewer Toggle */}
-        {filteredKits.length > 3 && (
-          <div className="mt-10 text-center">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:text-rose-600 hover:border-rose-300 hover:bg-rose-50/40 shadow-sm font-semibold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer"
-            >
-              <span>{showAll ? 'Show Fewer Kits' : `Show All ${filteredKits.length} Hardware Platforms (${filteredKits.length - 3} More)`}</span>
-              {showAll ? (
-                <ChevronUp className="w-4 h-4 text-rose-600" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-rose-600" />
-              )}
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Hardware Deep Dive Modal */}
+      {/* ========================================================================= */}
+      {/* APPLE-STYLE CAROUSEL (Centered Vertical Cards & 3 Slides Peeking)        */}
+      {/* ========================================================================= */}
+      <div
+        ref={containerRef}
+        className="relative w-full max-w-[1580px] mx-auto overflow-hidden select-none py-4"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        {/* Continuous Infinite Carousel Track */}
+        <div
+          onTransitionEnd={handleTransitionEnd}
+          className={`flex items-stretch ${
+            isDragging || !enableTransition
+              ? 'transition-none'
+              : 'transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]'
+          }`}
+          style={{
+            gap: `${gap}px`,
+            transform: `translateX(${translateX}px)`,
+          }}
+        >
+          {virtualKits.map((kit, vIdx) => {
+            const isCenter = vIdx === virtualIndex;
+
+            return (
+              <div
+                key={`${kit.id}-${vIdx}`}
+                ref={vIdx === 0 ? cardMeasureRef : null}
+                onClick={() => {
+                  if (!isCenter && !isDragging) {
+                    setVirtualIndex(vIdx);
+                  }
+                }}
+                className={`group relative shrink-0 w-[86vw] sm:w-[400px] md:w-[450px] lg:w-[480px] xl:w-[500px] rounded-[28px] sm:rounded-[32px] bg-white border p-6 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                  isCenter
+                    ? 'border-rose-400/80 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
+                    : 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
+                }`}
+              >
+                <div className="flex flex-col">
+                  {/* Badge Pill */}
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className="text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3.5 py-1 rounded-full border border-rose-200 shadow-xs">
+                      {kit.badge}
+                    </span>
+                    <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                      {kit.track}
+                    </span>
+                  </div>
+
+                  {/* Title & Tagline */}
+                  <div className="min-h-[72px] flex flex-col justify-start">
+                    <h3
+                      className={`text-xl sm:text-2xl font-extrabold tracking-tight leading-snug font-display transition-colors ${
+                        isCenter ? 'text-slate-900 group-hover:text-rose-600' : 'text-slate-800'
+                      }`}
+                    >
+                      {kit.name}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-mono mt-1 font-semibold leading-relaxed line-clamp-2">
+                      {kit.tagline}
+                    </p>
+                  </div>
+
+                  {/* Product Image Frame */}
+                  <div className="relative my-4 h-52 sm:h-56 rounded-2xl bg-slate-50/90 border border-slate-200/80 p-3.5 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300 shadow-inner">
+                    <img
+                      src={kit.image}
+                      alt={kit.fullName}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = kit.fallbackImage;
+                      }}
+                      className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  </div>
+
+                  {/* Core Engineering Modules */}
+                  <div className="flex flex-col mt-1">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2.5">
+                      Core Engineering Modules:
+                    </span>
+                    <div className="space-y-2 min-h-[140px] flex flex-col justify-start">
+                      {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2 text-xs text-slate-700 font-medium leading-relaxed"
+                        >
+                          <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
+                          <span className="line-clamp-2">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Actions */}
+                <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveKitModal(kit);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
+                  >
+                    <span>FULL SPECIFICATIONS</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+
+                  <Button
+                    variant={isCenter ? 'primary' : 'outline'}
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRegisterClick();
+                    }}
+                    className="text-xs px-3.5"
+                  >
+                    Join Bootcamp
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Apple-Style Navigation & Pagination Bar */}
+        <div className="mt-8 flex items-center justify-center gap-4">
+          {/* Auto-play Play/Pause Button */}
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer"
+            title={isPlaying ? 'Pause auto-slide' : 'Resume auto-slide'}
+            aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
+          >
+            {isPlaying ? (
+              <Pause className="w-3.5 h-3.5" />
+            ) : (
+              <Play className="w-3.5 h-3.5 ml-0.5" />
+            )}
+          </button>
+
+          {/* Pagination Indicators */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm">
+            {filteredKits.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleGoToRealIndex(idx)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  realCurrentIndex === idx
+                    ? 'w-8 h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
+                    : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
+                }`}
+                aria-label={`Slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Slide Index Counter */}
+          <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2.5 py-1 rounded-full border border-slate-200 shadow-sm">
+            0{realCurrentIndex + 1} / 0{filteredKits.length}
+          </span>
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* HARDWARE DEEP DIVE MODAL                                                  */}
+      {/* ========================================================================= */}
       {activeKitModal && (
         <Modal
           isOpen={!!activeKitModal}
@@ -172,6 +463,9 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                 <img
                   src={activeKitModal.image}
                   alt={activeKitModal.fullName}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = activeKitModal.fallbackImage;
+                  }}
                   className="w-full h-full object-contain drop-shadow-md"
                 />
               </div>
@@ -187,8 +481,12 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                 <div className="grid grid-cols-2 gap-2 mt-2">
                   {activeKitModal.specs.map((spec, i) => (
                     <div key={i} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                      <span className="text-[10px] font-mono text-slate-500 uppercase font-bold block">{spec.label}</span>
-                      <span className="text-xs font-bold text-slate-900 truncate block">{spec.value}</span>
+                      <span className="text-[10px] font-mono text-slate-500 uppercase font-bold block">
+                        {spec.label}
+                      </span>
+                      <span className="text-xs font-bold text-slate-900 truncate block">
+                        {spec.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -209,20 +507,25 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                         {comp.category}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-600 mt-1 leading-relaxed">{comp.description}</p>
+                    <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                      {comp.description}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* What Students Learn */}
+            {/* Applied Engineering Competencies */}
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
               <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-700 font-bold mb-2 flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" /> Applied Engineering Competencies:
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {activeKitModal.whatStudentsLearn.map((item, idx) => (
-                  <li key={idx} className="text-xs text-slate-700 font-medium flex items-start gap-1.5 leading-relaxed">
+                  <li
+                    key={idx}
+                    className="text-xs text-slate-700 font-medium flex items-start gap-1.5 leading-relaxed"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
                     <span>{item}</span>
                   </li>

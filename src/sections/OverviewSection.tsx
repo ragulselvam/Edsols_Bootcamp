@@ -8,7 +8,7 @@ export const OverviewSection: React.FC = () => {
   const iconMap: Record<string, React.ReactNode> = {
     Calendar: <Calendar className="w-6 h-6 text-rose-600" />,
     Clock: <Clock className="w-6 h-6 text-rose-600" />,
-    GraduationCap: <GraduationCap className="w-6 h-6 text-slate-800" />,
+    GraduationCap: <GraduationCap className="w-6 h-6 text-rose-600" />,
     Users: <Users2 className="w-6 h-6 text-rose-600" />,
   };
 
