@@ -20,7 +20,7 @@ export const OverviewSection: React.FC = () => {
   };
 
   return (
-    <section id="overview" className="relative py-24 sm:py-32 bg-white/60 border-t border-slate-200/80">
+    <section id="overview" className="relative py-24 sm:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badgeText="Bootcamp Overview"

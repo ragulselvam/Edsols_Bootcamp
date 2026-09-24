@@ -11,7 +11,7 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="relative py-24 sm:py-32 bg-slate-50/50">
+    <section id="faq" className="relative py-24 sm:py-32 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badgeText="Parent & Student FAQs"

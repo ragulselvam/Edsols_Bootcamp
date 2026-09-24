@@ -43,7 +43,7 @@ export const SkillsSection: React.FC = () => {
   const displayedSkills = showAll ? skillsData : skillsData.slice(0, 4);
 
   return (
-    <section id="skills" className="relative py-24 sm:py-32 bg-slate-50/50">
+    <section id="skills" className="relative py-24 sm:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badgeText="Future-Ready Competencies"

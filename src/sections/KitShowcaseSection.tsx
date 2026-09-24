@@ -232,7 +232,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
   return (
     <section
       id="kits"
-      className="relative py-16 sm:py-24 bg-white/80 border-t border-slate-200/80 w-full overflow-hidden"
+      className="relative py-16 sm:py-24 bg-white w-full overflow-hidden"
     >
       {/* Background Lighting & Glow Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-radial from-rose-100/40 via-transparent to-transparent blur-3xl pointer-events-none" />
