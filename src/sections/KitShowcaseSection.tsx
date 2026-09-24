@@ -277,7 +277,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
       {/* ========================================================================= */}
       <div
         ref={containerRef}
-        className="relative w-full max-w-[1580px] mx-auto overflow-hidden select-none py-4"
+        className="relative w-full max-w-[1360px] mx-auto overflow-hidden select-none py-4"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
@@ -302,6 +302,8 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
         >
           {virtualKits.map((kit, vIdx) => {
             const isCenter = vIdx === virtualIndex;
+            const distance = Math.abs(vIdx - virtualIndex);
+            const isVisible = distance <= 1;
 
             return (
               <div
@@ -312,10 +314,12 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                     setVirtualIndex(vIdx);
                   }
                 }}
-                className={`group relative shrink-0 w-[88vw] max-w-[340px] xs:w-[84vw] xs:max-w-[380px] sm:w-[400px] md:w-[450px] lg:w-[480px] xl:w-[500px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                className={`group relative shrink-0 w-[86vw] max-w-[350px] xs:w-[84vw] xs:max-w-[390px] sm:w-[420px] md:w-[460px] lg:w-[490px] xl:w-[510px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
                   isCenter
                     ? 'border-rose-400/80 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
-                    : 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
+                    : isVisible
+                    ? 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
+                    : 'opacity-0 scale-75 pointer-events-none invisible'
                 }`}
               >
                 <div className="flex flex-col">
