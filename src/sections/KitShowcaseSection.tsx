@@ -273,179 +273,181 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* APPLE-STYLE CAROUSEL (Centered Vertical Cards & 3 Slides Peeking)        */}
+      {/* 3-SLIDE CAROUSEL (Spans from margin start to margin end across 3 cards)     */}
       {/* ========================================================================= */}
-      <div
-        ref={containerRef}
-        className="relative w-full max-w-[1360px] mx-auto overflow-hidden select-none py-4"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        {/* Continuous Infinite Carousel Track */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div
-          onTransitionEnd={handleTransitionEnd}
-          className={`flex items-stretch ${
-            isDragging || !enableTransition
-              ? 'transition-none'
-              : 'transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]'
-          }`}
-          style={{
-            gap: `${gap}px`,
-            transform: `translateX(${translateX}px)`,
-          }}
+          ref={containerRef}
+          className="relative w-full overflow-hidden select-none py-4"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
         >
-          {virtualKits.map((kit, vIdx) => {
-            const isCenter = vIdx === virtualIndex;
-            const distance = Math.abs(vIdx - virtualIndex);
-            const isVisible = distance <= 1;
+          {/* Continuous Infinite Carousel Track */}
+          <div
+            onTransitionEnd={handleTransitionEnd}
+            className={`flex items-stretch ${
+              isDragging || !enableTransition
+                ? 'transition-none'
+                : 'transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]'
+            }`}
+            style={{
+              gap: `${gap}px`,
+              transform: `translateX(${translateX}px)`,
+            }}
+          >
+            {virtualKits.map((kit, vIdx) => {
+              const isCenter = vIdx === virtualIndex;
+              const distance = Math.abs(vIdx - virtualIndex);
+              const isVisible = distance <= 1;
 
-            return (
-              <div
-                key={`${kit.id}-${vIdx}`}
-                ref={vIdx === 0 ? cardMeasureRef : null}
-                onClick={() => {
-                  if (!isCenter && !isDragging) {
-                    setVirtualIndex(vIdx);
-                  }
-                }}
-                className={`group relative shrink-0 w-[86vw] max-w-[350px] xs:w-[84vw] xs:max-w-[390px] sm:w-[420px] md:w-[460px] lg:w-[490px] xl:w-[510px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
-                  isCenter
-                    ? 'border-rose-400/80 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
-                    : isVisible
-                    ? 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
-                    : 'opacity-0 scale-75 pointer-events-none invisible'
-                }`}
-              >
-                <div className="flex flex-col">
-                  {/* Badge Pill */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3 py-0.5 sm:py-1 rounded-full border border-rose-200 shadow-xs truncate max-w-[70%]">
-                      {kit.badge}
-                    </span>
-                    <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
-                      {kit.track}
-                    </span>
-                  </div>
+              return (
+                <div
+                  key={`${kit.id}-${vIdx}`}
+                  ref={vIdx === 0 ? cardMeasureRef : null}
+                  onClick={() => {
+                    if (!isCenter && !isDragging) {
+                      setVirtualIndex(vIdx);
+                    }
+                  }}
+                  className={`group relative shrink-0 w-[86vw] max-w-[350px] xs:w-[84vw] xs:max-w-[390px] sm:w-[calc((100%-20px)/2)] lg:w-[calc((100%-56px)/3)] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                    isCenter
+                      ? 'border-rose-400/90 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
+                      : isVisible
+                      ? 'border-slate-200/90 shadow-md scale-100 opacity-70 hover:opacity-100 z-10 cursor-pointer hover:border-slate-300'
+                      : 'opacity-0 scale-75 pointer-events-none invisible'
+                  }`}
+                >
+                  <div className="flex flex-col">
+                    {/* Badge Pill */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3 py-0.5 sm:py-1 rounded-full border border-rose-200 shadow-xs truncate max-w-[70%]">
+                        {kit.badge}
+                      </span>
+                      <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                        {kit.track}
+                      </span>
+                    </div>
 
-                  {/* Title & Tagline */}
-                  <div className="min-h-[58px] sm:min-h-[72px] flex flex-col justify-start">
-                    <h3
-                      className={`text-lg xs:text-xl sm:text-2xl font-extrabold tracking-tight leading-snug font-display transition-colors ${
-                        isCenter ? 'text-slate-900 group-hover:text-rose-600' : 'text-slate-800'
-                      }`}
-                    >
-                      {kit.name}
-                    </h3>
-                    <p className="text-xs text-slate-500 font-mono mt-1 font-semibold leading-relaxed line-clamp-2">
-                      {kit.tagline}
-                    </p>
-                  </div>
+                    {/* Title & Tagline */}
+                    <div className="min-h-[58px] sm:min-h-[72px] flex flex-col justify-start">
+                      <h3
+                        className={`text-lg xs:text-xl sm:text-2xl font-extrabold tracking-tight leading-snug font-display transition-colors ${
+                          isCenter ? 'text-slate-900 group-hover:text-rose-600' : 'text-slate-800'
+                        }`}
+                      >
+                        {kit.name}
+                      </h3>
+                      <p className="text-xs text-slate-500 font-mono mt-1 font-semibold leading-relaxed line-clamp-2">
+                        {kit.tagline}
+                      </p>
+                    </div>
 
-                  {/* Product Image Frame */}
-                  <div className="relative my-3 sm:my-4 h-44 xs:h-48 sm:h-56 rounded-2xl bg-slate-50/90 border border-slate-200/80 p-3 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300 shadow-inner">
-                    <img
-                      src={kit.image}
-                      alt={kit.fullName}
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = kit.fallbackImage;
-                      }}
-                      className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                  </div>
+                    {/* Product Image Frame */}
+                    <div className="relative my-3 sm:my-4 h-44 xs:h-48 sm:h-56 rounded-2xl bg-slate-50/90 border border-slate-200/80 p-3 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300 shadow-inner">
+                      <img
+                        src={kit.image}
+                        alt={kit.fullName}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = kit.fallbackImage;
+                        }}
+                        className="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                        draggable={false}
+                      />
+                    </div>
 
-                  {/* Core Engineering Modules */}
-                  <div className="flex flex-col mt-1">
-                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2">
-                      Core Engineering Modules:
-                    </span>
-                    <div className="space-y-1.5 sm:space-y-2 min-h-[110px] sm:min-h-[140px] flex flex-col justify-start">
-                      {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-700 font-medium leading-relaxed"
-                        >
-                          <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
-                          <span className="line-clamp-2">{feature}</span>
-                        </div>
-                      ))}
+                    {/* Core Engineering Modules */}
+                    <div className="flex flex-col mt-1">
+                      <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2">
+                        Core Engineering Modules:
+                      </span>
+                      <div className="space-y-1.5 sm:space-y-2 min-h-[110px] sm:min-h-[140px] flex flex-col justify-start">
+                        {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-700 font-medium leading-relaxed"
+                          >
+                            <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
+                            <span className="line-clamp-2">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
+
+                  {/* Product Actions */}
+                  <div className="mt-4 sm:mt-5 pt-3 sm:pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2 sm:gap-3">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveKitModal(kit);
+                      }}
+                      className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
+                    >
+                      <span>FULL SPECS</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    <Button
+                      variant={isCenter ? 'primary' : 'outline'}
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onRegisterClick();
+                      }}
+                      className="text-xs px-2.5 sm:px-3.5 py-1.5"
+                    >
+                      Join Bootcamp
+                    </Button>
+                  </div>
                 </div>
-
-                {/* Product Actions */}
-                <div className="mt-4 sm:mt-5 pt-3 sm:pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2 sm:gap-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveKitModal(kit);
-                    }}
-                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
-                  >
-                    <span>FULL SPECS</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-
-                  <Button
-                    variant={isCenter ? 'primary' : 'outline'}
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onRegisterClick();
-                    }}
-                    className="text-xs px-2.5 sm:px-3.5 py-1.5"
-                  >
-                    Join Bootcamp
-                  </Button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom Apple-Style Navigation & Pagination Bar */}
-        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-4 px-2">
-          {/* Auto-play Play/Pause Button */}
-          <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer flex-shrink-0"
-            title={isPlaying ? 'Pause auto-slide' : 'Resume auto-slide'}
-            aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
-          >
-            {isPlaying ? (
-              <Pause className="w-3.5 h-3.5" />
-            ) : (
-              <Play className="w-3.5 h-3.5 ml-0.5" />
-            )}
-          </button>
-
-          {/* Pagination Indicators */}
-          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm max-w-[65vw] overflow-x-auto">
-            {filteredKits.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleGoToRealIndex(idx)}
-                className={`transition-all duration-300 rounded-full cursor-pointer flex-shrink-0 ${
-                  realCurrentIndex === idx
-                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
-                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
-                }`}
-                aria-label={`Slide ${idx + 1}`}
-              />
-            ))}
+              );
+            })}
           </div>
 
-          {/* Slide Index Counter */}
-          <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2 sm:px-2.5 py-1 rounded-full border border-slate-200 shadow-sm flex-shrink-0">
-            0{realCurrentIndex + 1} / 0{filteredKits.length}
-          </span>
+          {/* Bottom Apple-Style Navigation & Pagination Bar */}
+          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-4 px-2">
+            {/* Auto-play Play/Pause Button */}
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer flex-shrink-0"
+              title={isPlaying ? 'Pause auto-slide' : 'Resume auto-slide'}
+              aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
+            >
+              {isPlaying ? (
+                <Pause className="w-3.5 h-3.5" />
+              ) : (
+                <Play className="w-3.5 h-3.5 ml-0.5" />
+              )}
+            </button>
+
+            {/* Pagination Indicators */}
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm max-w-[65vw] overflow-x-auto">
+              {filteredKits.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleGoToRealIndex(idx)}
+                  className={`transition-all duration-300 rounded-full cursor-pointer flex-shrink-0 ${
+                    realCurrentIndex === idx
+                      ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
+                      : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
+                  }`}
+                  aria-label={`Slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Slide Index Counter */}
+            <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2 sm:px-2.5 py-1 rounded-full border border-slate-200 shadow-sm flex-shrink-0">
+              0{realCurrentIndex + 1} / 0{filteredKits.length}
+            </span>
+          </div>
         </div>
       </div>
 
