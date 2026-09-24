@@ -31,7 +31,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onRegisterClic
   };
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32 bg-slate-50/60">
+    <section id="projects" className="relative py-24 sm:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badgeText="Student Inventions & Builds"

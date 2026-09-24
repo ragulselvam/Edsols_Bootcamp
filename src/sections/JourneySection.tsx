@@ -28,7 +28,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick 
   };
 
   return (
-    <section id="journey" className="relative py-24 sm:py-32 bg-white/70 border-t border-slate-200/80">
+    <section id="journey" className="relative py-24 sm:py-32 bg-white">
       {/* Dynamic Background */}
       <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-rose-100/30 rounded-full blur-3xl pointer-events-none" />
 

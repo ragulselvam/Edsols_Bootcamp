@@ -119,7 +119,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
   };
 
   return (
-    <section id="register" className="relative py-24 sm:py-32 bg-white border-t border-slate-200 overflow-hidden">
+    <section id="register" className="relative py-24 sm:py-32 bg-white overflow-hidden">
       {/* Background Lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-gradient-radial from-rose-100/35 via-transparent to-transparent blur-3xl pointer-events-none" />
 
