@@ -279,7 +279,7 @@ export const SkillsSection: React.FC = () => {
                     setVirtualIndex(vIdx);
                   }
                 }}
-                className={`group relative shrink-0 w-[86vw] sm:w-[380px] md:w-[420px] lg:w-[440px] xl:w-[460px] rounded-[28px] sm:rounded-[32px] bg-white border p-6 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                className={`group relative shrink-0 w-[88vw] max-w-[340px] xs:w-[84vw] xs:max-w-[370px] sm:w-[380px] md:w-[420px] lg:w-[440px] xl:w-[460px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
                   isCenter
                     ? 'border-rose-400/80 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
                     : 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
@@ -287,25 +287,25 @@ export const SkillsSection: React.FC = () => {
               >
                 <div className="flex flex-col">
                   {/* Top Row: Icon Container & Badges */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 rounded-2xl bg-rose-50/80 border border-rose-200 group-hover:border-rose-300 group-hover:scale-110 transition-all shadow-xs">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="p-2.5 sm:p-3 rounded-2xl bg-rose-50/80 border border-rose-200 group-hover:border-rose-300 group-hover:scale-110 transition-all shadow-xs">
                       {iconMap[skill.icon] || <Zap className="w-5 h-5 text-rose-600" />}
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200 shadow-xs">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-rose-200 shadow-xs truncate max-w-[140px]">
                         {skill.level}
                       </span>
-                      <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                      <span className="text-[9px] sm:text-[10px] font-mono font-semibold uppercase text-slate-400 bg-slate-100 px-1.5 sm:px-2 py-0.5 rounded">
                         {skill.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Skill Title */}
-                  <div className="min-h-[52px] flex items-center">
+                  <div className="min-h-[44px] sm:min-h-[52px] flex items-center">
                     <h3
-                      className={`text-xl sm:text-2xl font-extrabold tracking-tight font-display transition-colors ${
+                      className={`text-lg xs:text-xl sm:text-2xl font-extrabold tracking-tight font-display transition-colors ${
                         isCenter ? 'text-slate-900 group-hover:text-rose-600' : 'text-slate-800'
                       }`}
                     >
@@ -314,13 +314,13 @@ export const SkillsSection: React.FC = () => {
                   </div>
 
                   {/* Summary Description */}
-                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed mt-2 min-h-[56px]">
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed mt-1.5 sm:mt-2 min-h-[48px] sm:min-h-[56px]">
                     {skill.summary}
                   </p>
 
                   {/* Real-World Engineering Impact Highlight */}
-                  <div className="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 group-hover:border-rose-200/70 group-hover:bg-rose-50/15 transition-all">
-                    <div className="flex items-center gap-1.5 mb-1.5">
+                  <div className="mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-50 border border-slate-200/80 group-hover:border-rose-200/70 group-hover:bg-rose-50/15 transition-all">
+                    <div className="flex items-center gap-1.5 mb-1 sm:mb-1.5">
                       <Target className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
                       <span className="text-[10px] font-mono text-slate-500 font-bold uppercase tracking-wider">
                         Real-World Engineering Impact:
@@ -333,13 +333,13 @@ export const SkillsSection: React.FC = () => {
                 </div>
 
                 {/* Footer Tag */}
-                <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-slate-500">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    Industry Verified Pedagogy
+                <div className="mt-4 sm:mt-5 pt-3 sm:pt-3.5 border-t border-slate-100 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono font-medium text-slate-500">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                    <span>Industry Verified</span>
                   </span>
 
-                  <span className="text-[10px] font-mono font-bold text-rose-600 uppercase tracking-wider">
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold text-rose-600 uppercase tracking-wider">
                     DEMO DAY EVALUATED
                   </span>
                 </div>
@@ -349,11 +349,11 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* Bottom Apple-Style Navigation & Pagination Bar */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-4 px-2">
           {/* Auto-play Play/Pause Button */}
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer"
+            className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer flex-shrink-0"
             title={isPlaying ? 'Pause auto-slide' : 'Resume auto-slide'}
             aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
           >
@@ -365,15 +365,15 @@ export const SkillsSection: React.FC = () => {
           </button>
 
           {/* Pagination Indicators */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm max-w-[80vw] overflow-x-auto">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm max-w-[65vw] sm:max-w-none overflow-x-auto">
             {skillsData.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleGoToRealIndex(idx)}
                 className={`transition-all duration-300 rounded-full cursor-pointer flex-shrink-0 ${
                   realCurrentIndex === idx
-                    ? 'w-8 h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
-                    : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
                 }`}
                 aria-label={`Slide ${idx + 1}`}
               />
@@ -381,7 +381,7 @@ export const SkillsSection: React.FC = () => {
           </div>
 
           {/* Slide Index Counter */}
-          <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2.5 py-1 rounded-full border border-slate-200 shadow-sm">
+          <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2 sm:px-2.5 py-1 rounded-full border border-slate-200 shadow-sm flex-shrink-0">
             {String(realCurrentIndex + 1).padStart(2, '0')} / {String(skillsData.length).padStart(2, '0')}
           </span>
         </div>
@@ -390,34 +390,34 @@ export const SkillsSection: React.FC = () => {
       {/* ========================================================================= */}
       {/* CERTIFICATE OF COMPLETION SHOWCASE BANNER                                 */}
       {/* ========================================================================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
-        <div className="relative rounded-3xl bg-gradient-to-r from-white via-rose-50/30 to-white border border-slate-200/90 p-8 sm:p-12 shadow-edsols-card hover:shadow-xl transition-all duration-300 overflow-hidden text-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16">
+        <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-r from-white via-rose-50/30 to-white border border-slate-200/90 p-6 sm:p-10 md:p-12 shadow-edsols-card hover:shadow-xl transition-all duration-300 overflow-hidden text-slate-900">
           <div className="absolute top-0 right-0 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-4">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div className="lg:col-span-8 space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2">
-                <Award className="w-6 h-6 text-rose-600" />
-                <span className="text-xs font-mono uppercase tracking-widest text-rose-600 font-bold">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-rose-600 flex-shrink-0" />
+                <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-rose-600 font-bold">
                   Official Credentialing & Verified Portfolio
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
                 Official EDSOLS Bootcamp Certificate of Completion
               </h3>
 
-              <p className="text-sm text-slate-600 leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
                 Graduates receive an official, cryptographically verifiable certificate detailing their completed engineering hours, mastery across Robotics, IoT, and Computer Vision, and their Demo Day capstone invention score.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono text-slate-700">
-                <span className="flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-xs font-medium">
-                  <ShieldCheck className="w-4 h-4 text-rose-600" />
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2 text-xs font-mono text-slate-700">
+                <span className="flex items-center gap-1.5 bg-white px-3 sm:px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-xs font-medium text-[11px] sm:text-xs">
+                  <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-600" />
                   Verified Engineering Portfolio
                 </span>
-                <span className="flex items-center gap-1.5 bg-white px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-xs font-medium">
-                  <ShieldCheck className="w-4 h-4 text-rose-600" />
+                <span className="flex items-center gap-1.5 bg-white px-3 sm:px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-xs font-medium text-[11px] sm:text-xs">
+                  <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-600" />
                   Demonstrated Hardware Fluency
                 </span>
               </div>
@@ -425,20 +425,20 @@ export const SkillsSection: React.FC = () => {
 
             {/* Visual Credential Badge */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end">
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-rose-500/5 text-center flex flex-col items-center max-w-xs w-full">
-                <div className="mb-4">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-rose-500/5 text-center flex flex-col items-center max-w-xs w-full">
+                <div className="mb-3 sm:mb-4">
                   <BrandLogo theme="light" size="sm" showTagline={false} />
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center mb-2.5 shadow-xs">
-                  <Award className="w-6 h-6 text-rose-600" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center mb-2 sm:mb-2.5 shadow-xs">
+                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-rose-600" />
                 </div>
-                <span className="text-sm font-bold text-slate-900">
+                <span className="text-xs sm:text-sm font-bold text-slate-900">
                   Official Innovation Credential
                 </span>
-                <span className="text-xs text-slate-500 font-mono mt-1">
+                <span className="text-[11px] sm:text-xs text-slate-500 font-mono mt-0.5 sm:mt-1">
                   Robotics · IoT · AI Mastery
                 </span>
-                <span className="mt-3 inline-block text-[10px] font-mono text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200 font-bold shadow-xs">
+                <span className="mt-2.5 sm:mt-3 inline-block text-[9px] sm:text-[10px] font-mono text-rose-700 bg-rose-50 px-2.5 sm:px-3 py-1 rounded-full border border-rose-200 font-bold shadow-xs">
                   ISSUED AT DEMO DAY
                 </span>
               </div>

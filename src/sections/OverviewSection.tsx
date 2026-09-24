@@ -20,7 +20,7 @@ export const OverviewSection: React.FC = () => {
   };
 
   return (
-    <section id="overview" className="relative py-24 sm:py-32 bg-white">
+    <section id="overview" className="relative py-16 sm:py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badgeText="Bootcamp Overview"
@@ -31,32 +31,32 @@ export const OverviewSection: React.FC = () => {
         />
 
         {/* 4 Large Telemetry Statistic Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {bootcampData.stats.map((stat) => (
             <GlowingCard
               key={stat.number}
               glowColor={glowColorMap[stat.number] || 'blue'}
-              className="p-6 sm:p-7 group flex flex-col justify-between bg-white border border-slate-200/90 shadow-edsols-card"
+              className="p-5 sm:p-6 md:p-7 group flex flex-col justify-between bg-white border border-slate-200/90 shadow-edsols-card"
             >
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono text-3xl font-black text-slate-300 group-hover:text-rose-500/60 transition-colors">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <span className="font-mono text-2xl sm:text-3xl font-black text-slate-300 group-hover:text-rose-500/60 transition-colors">
                     {stat.number}
                   </span>
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 group-hover:border-rose-300 transition-colors">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 border border-slate-200 group-hover:border-rose-300 transition-colors">
                     {iconMap[stat.iconName]}
                   </div>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display tracking-tight">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 font-display tracking-tight leading-snug">
                   {stat.title}
                 </h3>
 
-                <p className="text-sm font-bold text-rose-600 mt-1">
+                <p className="text-xs sm:text-sm font-bold text-rose-600 mt-1">
                   {stat.subtitle}
                 </p>
 
-                <p className="text-xs text-slate-600 mt-3 leading-relaxed">
+                <p className="text-xs sm:text-xs text-slate-600 mt-2.5 sm:mt-3 leading-relaxed">
                   {stat.detail}
                 </p>
               </div>

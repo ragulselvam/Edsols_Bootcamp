@@ -312,7 +312,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                     setVirtualIndex(vIdx);
                   }
                 }}
-                className={`group relative shrink-0 w-[86vw] sm:w-[400px] md:w-[450px] lg:w-[480px] xl:w-[500px] rounded-[28px] sm:rounded-[32px] bg-white border p-6 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                className={`group relative shrink-0 w-[88vw] max-w-[340px] xs:w-[84vw] xs:max-w-[380px] sm:w-[400px] md:w-[450px] lg:w-[480px] xl:w-[500px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
                   isCenter
                     ? 'border-rose-400/80 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
                     : 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
@@ -320,8 +320,8 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
               >
                 <div className="flex flex-col">
                   {/* Badge Pill */}
-                  <div className="flex items-center justify-between mb-3.5">
-                    <span className="text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3.5 py-1 rounded-full border border-rose-200 shadow-xs">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-rose-700 uppercase bg-rose-50 px-3 py-0.5 sm:py-1 rounded-full border border-rose-200 shadow-xs truncate max-w-[70%]">
                       {kit.badge}
                     </span>
                     <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
@@ -330,9 +330,9 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                   </div>
 
                   {/* Title & Tagline */}
-                  <div className="min-h-[72px] flex flex-col justify-start">
+                  <div className="min-h-[58px] sm:min-h-[72px] flex flex-col justify-start">
                     <h3
-                      className={`text-xl sm:text-2xl font-extrabold tracking-tight leading-snug font-display transition-colors ${
+                      className={`text-lg xs:text-xl sm:text-2xl font-extrabold tracking-tight leading-snug font-display transition-colors ${
                         isCenter ? 'text-slate-900 group-hover:text-rose-600' : 'text-slate-800'
                       }`}
                     >
@@ -344,7 +344,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                   </div>
 
                   {/* Product Image Frame */}
-                  <div className="relative my-4 h-52 sm:h-56 rounded-2xl bg-slate-50/90 border border-slate-200/80 p-3.5 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300 shadow-inner">
+                  <div className="relative my-3 sm:my-4 h-44 xs:h-48 sm:h-56 rounded-2xl bg-slate-50/90 border border-slate-200/80 p-3 flex items-center justify-center overflow-hidden group-hover:border-rose-300 group-hover:bg-rose-50/20 transition-all duration-300 shadow-inner">
                     <img
                       src={kit.image}
                       alt={kit.fullName}
@@ -359,14 +359,14 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
 
                   {/* Core Engineering Modules */}
                   <div className="flex flex-col mt-1">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2.5">
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-slate-500 font-bold block mb-2">
                       Core Engineering Modules:
                     </span>
-                    <div className="space-y-2 min-h-[140px] flex flex-col justify-start">
+                    <div className="space-y-1.5 sm:space-y-2 min-h-[110px] sm:min-h-[140px] flex flex-col justify-start">
                       {kit.highlightFeatures.slice(0, 4).map((feature, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-2 text-xs text-slate-700 font-medium leading-relaxed"
+                          className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-700 font-medium leading-relaxed"
                         >
                           <Zap className="w-3.5 h-3.5 text-rose-600 mt-0.5 flex-shrink-0" />
                           <span className="line-clamp-2">{feature}</span>
@@ -377,15 +377,15 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                 </div>
 
                 {/* Product Actions */}
-                <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3">
+                <div className="mt-4 sm:mt-5 pt-3 sm:pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2 sm:gap-3">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setActiveKitModal(kit);
                     }}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-rose-600 hover:text-rose-700 font-mono tracking-wider transition-colors cursor-pointer"
                   >
-                    <span>FULL SPECIFICATIONS</span>
+                    <span>FULL SPECS</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
 
@@ -396,7 +396,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
                       e.stopPropagation();
                       onRegisterClick();
                     }}
-                    className="text-xs px-3.5"
+                    className="text-xs px-2.5 sm:px-3.5 py-1.5"
                   >
                     Join Bootcamp
                   </Button>
@@ -407,11 +407,11 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
         </div>
 
         {/* Bottom Apple-Style Navigation & Pagination Bar */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-4 px-2">
           {/* Auto-play Play/Pause Button */}
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer"
+            className="p-2 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200 shadow-sm transition-all cursor-pointer flex-shrink-0"
             title={isPlaying ? 'Pause auto-slide' : 'Resume auto-slide'}
             aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
           >
@@ -423,15 +423,15 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
           </button>
 
           {/* Pagination Indicators */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm max-w-[65vw] overflow-x-auto">
             {filteredKits.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleGoToRealIndex(idx)}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                className={`transition-all duration-300 rounded-full cursor-pointer flex-shrink-0 ${
                   realCurrentIndex === idx
-                    ? 'w-8 h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
-                    : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-rose-600 shadow-sm shadow-rose-500/40'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-300 hover:bg-slate-400 hover:scale-125'
                 }`}
                 aria-label={`Slide ${idx + 1}`}
               />
@@ -439,7 +439,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
           </div>
 
           {/* Slide Index Counter */}
-          <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2.5 py-1 rounded-full border border-slate-200 shadow-sm">
+          <span className="text-xs font-mono font-bold text-slate-500 bg-white px-2 sm:px-2.5 py-1 rounded-full border border-slate-200 shadow-sm flex-shrink-0">
             0{realCurrentIndex + 1} / 0{filteredKits.length}
           </span>
         </div>
