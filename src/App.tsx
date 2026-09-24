@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { CircuitBackground } from './components/visual/CircuitBackground';
 
 import { HeroSection } from './sections/HeroSection';
 import { OverviewSection } from './sections/OverviewSection';
@@ -40,10 +39,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 text-slate-900 selection:bg-rose-500 selection:text-white font-sans overflow-x-hidden">
-      {/* Background Circuit & Glow Matrix */}
-      <CircuitBackground />
-
+    <div className="relative min-h-screen bg-white text-slate-900 selection:bg-rose-500 selection:text-white font-sans overflow-x-hidden">
       {/* Background EDSOLS Emblem Watermark: starts below Register Now button, cut 20% from right, rotated 20deg to right, zoomed out another 10% */}
       <div
         className="fixed top-20 sm:top-[84px] right-0 pointer-events-none select-none z-10 overflow-hidden"

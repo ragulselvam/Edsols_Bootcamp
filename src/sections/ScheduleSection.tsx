@@ -17,7 +17,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({
   ];
 
   return (
-    <section id="schedule" className="relative py-24 sm:py-32 bg-white/70 border-t border-slate-200/80">
+    <section id="schedule" className="relative py-24 sm:py-32 bg-white">
       {/* Background Lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-radial from-rose-100/35 via-transparent to-transparent blur-3xl pointer-events-none" />
 

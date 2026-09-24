@@ -24,7 +24,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
   const displayedKits = showAll ? filteredKits : filteredKits.slice(0, 3);
 
   return (
-    <section id="kits" className="relative py-24 sm:py-32 bg-white/80 border-t border-slate-200/80 overflow-hidden">
+    <section id="kits" className="relative py-24 sm:py-32 bg-white overflow-hidden">
       {/* Background Lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-radial from-rose-100/35 via-transparent to-transparent blur-3xl pointer-events-none" />
 

@@ -30,7 +30,7 @@ export const TracksSection: React.FC<TracksSectionProps> = ({
   };
 
   return (
-    <section id="tracks" className="relative py-24 sm:py-32 bg-slate-50/50 overflow-hidden">
+    <section id="tracks" className="relative py-24 sm:py-32 bg-white overflow-hidden">
       {/* Subtle ambient lighting */}
       <div className="absolute top-1/3 left-0 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-cyan-100/40 rounded-full blur-3xl pointer-events-none" />
