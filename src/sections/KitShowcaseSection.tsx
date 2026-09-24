@@ -125,7 +125,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
     }
   }, [enableTransition]);
 
-  // Autoplay (every 7 seconds)
+  // Autoplay (every 5 seconds)
   useEffect(() => {
     if (
       !isPlaying ||
@@ -139,7 +139,7 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
 
     const timer = setInterval(() => {
       setVirtualIndex((prev) => prev + 1);
-    }, 7000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [isPlaying, isHovered, isDragging, activeKitModal, N]);
