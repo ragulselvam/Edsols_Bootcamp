@@ -11,7 +11,7 @@ import { ScheduleSection } from './sections/ScheduleSection';
 import { RegistrationSection } from './sections/RegistrationSection';
 
 export const App: React.FC = () => {
-  const [selectedMonth, setSelectedMonth] = useState<'October 2026' | 'November 2026'>('October 2026');
+  const [selectedMonth, setSelectedMonth] = useState<'Dussehra BootCamp' | 'Special BootCamp'>('Dussehra BootCamp');
   const [selectedBatch, setSelectedBatch] = useState<'Morning' | 'Afternoon'>('Morning');
 
   const scrollToSection = (sectionId: string) => {
@@ -30,7 +30,7 @@ export const App: React.FC = () => {
   };
 
   const handleSelectMonthAndRegister = (
-    month: 'October 2026' | 'November 2026',
+    month: 'Dussehra BootCamp' | 'Special BootCamp',
     batch?: 'Morning' | 'Afternoon'
   ) => {
     setSelectedMonth(month);

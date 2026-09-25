@@ -1,6 +1,9 @@
 import React from 'react';
 import { Calendar, Users2, Sun } from 'lucide-react';
-import { RobotAssemblyPuzzle } from '../components/visual/RobotAssemblyPuzzle';
+import { RobotShowcaseGallery } from '../components/visual/RobotShowcaseGallery';
+// Preserved robot animation components for future reuse:
+// import { RobotAssemblyPuzzle } from '../components/visual/RobotAssemblyPuzzle';
+// import { RobotCommandLine } from '../components/visual/RobotCommandLine';
 
 interface HeroSectionProps {
   onRegisterClick?: () => void;
@@ -34,7 +37,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
             </p>
 
             <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-slate-700 font-bold leading-relaxed max-w-2xl">
-              A hands-on <span className="text-rose-600 font-black">Robotics, IoT & AI Bootcamp</span> for students in Grades 6–12 by EDSOLS. Learn practical engineering through real hardware kits, computer vision, smart automation, and capstone inventions.
+              A hands-on <span className="text-rose-600 font-black">Robotics, IoT & AI Bootcamp</span> by EDSOLS, with progressive learning tracks for ages 6+ and 12+. Explore practical engineering through real hardware, Micro:bit, IoT, computer vision, smart automation, AI and robotics.
             </p>
 
             {/* Key Specs Pill Matrix */}
@@ -50,14 +53,14 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
                 </div>
               </div>
 
-              {/* Card 2: Designed for Grades 6-12 */}
+              {/* Card 2: Ages 6+ & 12+ */}
               <div className="bg-white/95 p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-cyan-300 hover:shadow-md transition-all">
                 <div className="p-2 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600 flex-shrink-0">
                   <Users2 className="w-4 h-4 text-cyan-600 stroke-[2.5]" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xs font-black text-slate-900 leading-tight">Designed for</div>
-                  <div className="text-xs font-black text-slate-900 mt-0.5 font-display tracking-tight">Grades 6–12</div>
+                  <div className="text-xs font-black text-slate-900 leading-tight">Progressive Tracks</div>
+                  <div className="text-xs font-black text-slate-900 mt-0.5 font-display tracking-tight">Ages 6+ & 12+</div>
                 </div>
               </div>
 
@@ -74,9 +77,14 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Interactive Robot Visual with Gaze & Rotate on Click */}
+          {/* RIGHT COLUMN: Robotics Photo Collection Gallery */}
           <div className="lg:col-span-7 flex justify-center items-center w-full">
-            <RobotAssemblyPuzzle />
+            <RobotShowcaseGallery />
+            {/*
+              PRESERVED ROBOT ANIMATION COMPONENTS (HELD FOR LATER REUSE):
+              <RobotAssemblyPuzzle />
+              <RobotCommandLine />
+            */}
           </div>
         </div>
       </div>

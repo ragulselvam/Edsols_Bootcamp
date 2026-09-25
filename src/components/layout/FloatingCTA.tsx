@@ -40,11 +40,11 @@ export const FloatingCTA: React.FC<FloatingCTAProps> = ({ onRegisterClick }) => 
             <span className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
               EDSOLS Bootcamp
               <span className="hidden md:inline-block text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-bold">
-                OCT & NOV OPEN
+                REGISTRATIONS OPEN
               </span>
             </span>
             <span className="text-[11px] text-slate-500 font-mono hidden sm:block">
-              Grades 6–12 · Weekend Morning & Afternoon Batches
+              Ages 6+ & 12+ · Weekend Morning & Afternoon Batches
             </span>
           </div>
         </div>

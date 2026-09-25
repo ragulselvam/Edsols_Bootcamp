@@ -33,13 +33,13 @@ export const Footer: React.FC = () => {
             />
 
             <p className="text-sm text-slate-400 leading-relaxed">
-              Hands-on technology learning for the next generation of creators, builders, and innovators by EDSOLS. Equipping school students in Grades 6–12 with real engineering and applied Edge AI capabilities.
+              Hands-on technology learning for the next generation of creators, builders, and innovators by EDSOLS. Progressive learning tracks for ages 6+ and 12+ with real engineering and applied Edge AI capabilities.
             </p>
 
             <div className="flex items-center gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 text-xs font-mono bg-rose-500/15 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-full font-bold">
                 <span className="h-2 w-2 rounded-full bg-rose-400 animate-pulse" />
-                Registrations Open · Oct & Nov 2026
+                Registrations Open · Dussehra & Special BootCamp
               </span>
             </div>
           </div>
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-6">
             <span>Weekend Innovation Program</span>
             <span>•</span>
-            <span>Grades 6–12</span>
+            <span>Ages 6+ & 12+</span>
             <span>•</span>
             <span className="text-rose-400">Robotics · IoT · AI</span>
           </div>

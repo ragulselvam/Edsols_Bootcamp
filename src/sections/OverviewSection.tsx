@@ -27,7 +27,7 @@ export const OverviewSection: React.FC = () => {
           badgeVariant="blue"
           title="One Month. Three Technologies."
           highlightText="Real Projects."
-          subtitle="A comprehensive, weekend-based practical technology program designed specifically for young innovators in Grades 6–12 by EDSOLS. Students learn through direct experimentation, guided engineering builds, and creative challenge sprints."
+          subtitle="A comprehensive, weekend-based practical technology program designed specifically for young innovators by EDSOLS. Students learn through direct experimentation, guided engineering builds, and creative challenge sprints."
         />
 
         {/* 4 Large Telemetry Statistic Cards */}

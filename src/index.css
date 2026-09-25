@@ -103,7 +103,7 @@
     opacity: 1;
   }
 
-  /* Gamified Code Block Game Animations for Grades 6-12 */
+  /* Gamified Code Block Game Animations for Ages 6+ & 12+ */
   @keyframes float-gentle {
     0%, 100% {
       transform: translateY(0px) rotate(0deg);

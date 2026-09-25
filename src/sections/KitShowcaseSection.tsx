@@ -48,15 +48,29 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState(0);
 
-  // Container & Card dimensions for dead-center alignment
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [cardWidth, setCardWidth] = useState(0);
+  // Dynamic measurements for dead-center alignment
+  const [translateX, setTranslateX] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardMeasureRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   // Real current kit index (0 to N - 1)
   const realCurrentIndex = isInfinite ? virtualIndex % N : 0;
+
+  // Symmetrical dead-center alignment formula:
+  // Dynamically centers the active card (virtualIndex) in the viewport on ANY screen size
+  const updateTranslateX = useCallback(() => {
+    if (!containerRef.current || !trackRef.current) return;
+    const cards = trackRef.current.children;
+    if (!cards || cards.length === 0) return;
+    const targetIdx = Math.min(Math.max(0, virtualIndex), cards.length - 1);
+    const activeCard = cards[targetIdx] as HTMLElement;
+    if (!activeCard) return;
+
+    const cardCenter = activeCard.offsetLeft + activeCard.offsetWidth / 2;
+    const containerCenter = containerRef.current.clientWidth / 2;
+    setTranslateX(containerCenter - cardCenter + dragOffset);
+  }, [virtualIndex, dragOffset]);
 
   // Reset virtualIndex when category tab changes
   useEffect(() => {
@@ -65,35 +79,23 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
     setEnableTransition(true);
   }, [activeTab, N, isInfinite]);
 
-  // Dimension measurement on mount and resize
-  const updateDimensions = useCallback(() => {
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.clientWidth);
-    }
-    if (cardMeasureRef.current) {
-      setCardWidth(cardMeasureRef.current.offsetWidth);
-    }
-  }, []);
-
+  // Dimension measurement on mount, resize, and activeTab change
   useEffect(() => {
-    updateDimensions();
-    const timeout = setTimeout(updateDimensions, 80);
-    window.addEventListener('resize', updateDimensions);
+    updateTranslateX();
+    const handleResize = () => updateTranslateX();
+    window.addEventListener('resize', handleResize);
+
+    const raf = requestAnimationFrame(updateTranslateX);
+    const t1 = setTimeout(updateTranslateX, 60);
+    const t2 = setTimeout(updateTranslateX, 200);
+
     return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
     };
-  }, [updateDimensions, activeTab, N]);
-
-  // Dynamic gap between vertical cards
-  const gap = containerWidth >= 1024 ? 28 : containerWidth >= 640 ? 20 : 16;
-
-  // Symmetrical dead-center formula:
-  // translateX = (containerWidth - cardWidth) / 2 - virtualIndex * (cardWidth + gap) + dragOffset
-  const translateX =
-    containerWidth > 0 && cardWidth > 0
-      ? (containerWidth - cardWidth) / 2 - virtualIndex * (cardWidth + gap) + dragOffset
-      : 0;
+  }, [updateTranslateX, activeTab, N]);
 
   // Handle infinite loop boundary resets silently without transition jump
   const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
@@ -289,14 +291,14 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
       >
         {/* Continuous Infinite Carousel Track */}
         <div
+          ref={trackRef}
           onTransitionEnd={handleTransitionEnd}
-          className={`flex items-stretch ${
+          className={`flex items-stretch gap-4 sm:gap-5 md:gap-6 lg:gap-7 ${
             isDragging || !enableTransition
               ? 'transition-none'
               : 'transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]'
           }`}
           style={{
-            gap: `${gap}px`,
             transform: `translateX(${translateX}px)`,
           }}
         >
@@ -308,18 +310,17 @@ export const KitShowcaseSection: React.FC<KitShowcaseSectionProps> = ({
             return (
               <div
                 key={`${kit.id}-${vIdx}`}
-                ref={vIdx === 0 ? cardMeasureRef : null}
                 onClick={() => {
                   if (!isCenter && !isDragging) {
                     setVirtualIndex(vIdx);
                   }
                 }}
-                className={`group relative shrink-0 w-[86vw] max-w-[350px] xs:w-[84vw] xs:max-w-[390px] sm:w-[420px] md:w-[460px] lg:w-[490px] xl:w-[510px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 xs:p-5 sm:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                className={`group relative shrink-0 w-[84vw] max-w-[340px] sm:w-[420px] md:w-[450px] lg:w-[480px] xl:w-[500px] rounded-[24px] sm:rounded-[32px] bg-white border p-4 sm:p-6 md:p-7 flex flex-col justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
                   isCenter
                     ? 'border-rose-400/80 shadow-2xl shadow-rose-500/15 scale-100 opacity-100 z-20 cursor-default ring-2 ring-rose-400/20'
                     : isVisible
-                    ? 'border-slate-200/80 shadow-md scale-[0.93] opacity-45 sm:opacity-55 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.95]'
-                    : 'opacity-0 scale-75 pointer-events-none invisible'
+                    ? 'border-slate-200/80 shadow-md scale-[0.94] opacity-50 sm:opacity-60 hover:opacity-85 z-10 cursor-pointer hover:scale-[0.96]'
+                    : 'opacity-0 scale-75 pointer-events-none'
                 }`}
               >
                 <div className="flex flex-col">

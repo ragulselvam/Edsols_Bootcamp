@@ -5,7 +5,7 @@ import { Modal } from '../components/common/Modal';
 import { BrandLogo } from '../components/common/BrandLogo';
 
 interface RegistrationSectionProps {
-  preselectedMonth?: 'October 2026' | 'November 2026';
+  preselectedMonth?: 'Dussehra BootCamp' | 'Special BootCamp';
   preselectedBatch?: 'Morning' | 'Afternoon';
 }
 
@@ -15,14 +15,14 @@ export interface RegistrationFormData {
   studentGrade: string;
   phone: string;
   email: string;
-  month: 'October 2026' | 'November 2026';
+  month: 'Dussehra BootCamp' | 'Special BootCamp';
   batch: 'Morning' | 'Afternoon';
   city: string;
   message: string;
 }
 
 export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
-  preselectedMonth = 'October 2026',
+  preselectedMonth = 'Dussehra BootCamp',
   preselectedBatch = 'Morning',
 }) => {
   const [formData, setFormData] = useState<RegistrationFormData>({
@@ -110,7 +110,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
       studentGrade: 'Grade 8',
       phone: '',
       email: '',
-      month: 'October 2026',
+      month: 'Dussehra BootCamp',
       batch: 'Morning',
       city: '',
       message: '',
@@ -140,14 +140,14 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
             </h2>
 
             <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed font-normal">
-              Registrations are now open for both the <strong className="text-slate-900">October and November 2026</strong> cohorts. Give your child a head start in Robotics, IoT, and AI with hands-on hardware engineering at EDSOLS.
+              Registrations are now open for both the <strong className="text-slate-900">Dussehra BootCamp and Special BootCamp</strong> cohorts. Give your child a head start in Robotics, IoT, and AI with hands-on hardware engineering at EDSOLS.
             </p>
 
             {/* Quick Cohort Summary Box */}
             <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 sm:space-y-4 shadow-xs">
               <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-slate-200">
                 <span className="text-[11px] sm:text-xs font-mono uppercase text-slate-500 font-bold">Target Cohort</span>
-                <span className="text-xs sm:text-sm font-bold text-slate-900">Grades 6–12 Students</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-900">Ages 6+ & 12+ Students</span>
               </div>
 
               <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-slate-200">
@@ -242,7 +242,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                   <div>
                     <label htmlFor="studentGrade" className="block text-xs font-mono uppercase tracking-wider text-slate-700 mb-1.5 sm:mb-2 font-bold">
-                      Student Grade *
+                      Student Grade / Age Group *
                     </label>
                     <div className="relative">
                       <GraduationCap className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
@@ -253,13 +253,16 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                         onChange={handleChange}
                         className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 text-base sm:text-sm text-slate-900 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all shadow-xs"
                       >
-                        <option value="Grade 6">Grade 6 (Middle School)</option>
-                        <option value="Grade 7">Grade 7 (Middle School)</option>
-                        <option value="Grade 8">Grade 8 (Middle School)</option>
-                        <option value="Grade 9">Grade 9 (High School)</option>
-                        <option value="Grade 10">Grade 10 (High School)</option>
-                        <option value="Grade 11">Grade 11 (High School)</option>
-                        <option value="Grade 12">Grade 12 (High School)</option>
+                        <option value="Age 6-7 (Grade 1–2)">Age 6–7 (Grades 1–2) — Micro:bit & IoT</option>
+                        <option value="Age 8-9 (Grade 3–4)">Age 8–9 (Grades 3–4) — Micro:bit & IoT</option>
+                        <option value="Age 10-11 (Grade 5–6)">Age 10–11 (Grades 5–6) — Micro:bit & IoT</option>
+                        <option value="Grade 6">Grade 6 (Age 11+ Track)</option>
+                        <option value="Grade 7">Grade 7 (Age 12+ Track)</option>
+                        <option value="Grade 8">Grade 8 (Age 12+ Track)</option>
+                        <option value="Grade 9">Grade 9 (Age 12+ Track)</option>
+                        <option value="Grade 10">Grade 10 (Age 12+ Track)</option>
+                        <option value="Grade 11">Grade 11 (Age 12+ Track)</option>
+                        <option value="Grade 12">Grade 12 (Age 12+ Track)</option>
                       </select>
                     </div>
                   </div>
@@ -329,10 +332,10 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-1 sm:pt-2">
                   <div>
                     <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 mb-1.5 sm:mb-2 font-bold">
-                      Select Cohort Month *
+                      Select Cohort *
                     </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      {(['October 2026', 'November 2026'] as const).map((m) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {(['Dussehra BootCamp', 'Special BootCamp'] as const).map((m) => (
                         <button
                           key={m}
                           type="button"

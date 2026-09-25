@@ -5,15 +5,15 @@ import { Button } from '../components/common/Button';
 import { scheduleConfig } from '../data/schedule';
 
 interface ScheduleSectionProps {
-  onSelectMonthAndRegister: (month: 'October 2026' | 'November 2026', batch?: 'Morning' | 'Afternoon') => void;
+  onSelectMonthAndRegister: (month: 'Dussehra BootCamp' | 'Special BootCamp', batch?: 'Morning' | 'Afternoon') => void;
 }
 
 export const ScheduleSection: React.FC<ScheduleSectionProps> = ({
   onSelectMonthAndRegister,
 }) => {
   const months = [
-    { key: 'october', data: scheduleConfig.october, value: 'October 2026' as const },
-    { key: 'november', data: scheduleConfig.november, value: 'November 2026' as const },
+    { key: 'october', data: scheduleConfig.october, value: 'Dussehra BootCamp' as const },
+    { key: 'november', data: scheduleConfig.november, value: 'Special BootCamp' as const },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({
           badgeVariant="blue"
           title="CHOOSE YOUR"
           highlightText="BATCH"
-          subtitle="Both October and November 2026 cohorts are currently open for registration. Choose the month and batch time slot that best fits your weekend routine."
+          subtitle="Both Dussehra BootCamp and Special BootCamp cohorts are currently open for registration. Choose the batch time slot that best fits your weekend routine."
         />
 
         {/* 2 Large Cohort Cards */}

@@ -154,7 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onRegisterClick }) => {
 
           <div className="pt-4 border-t border-slate-200 flex flex-col gap-3">
             <div className="text-xs text-slate-500 font-mono text-center">
-              EDSOLS Bootcamp · Grades 6–12 · Oct & Nov Open
+              EDSOLS Bootcamp · Ages 6+ & 12+ · Registrations Open
             </div>
             <Button
               variant="primary"

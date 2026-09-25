@@ -29,13 +29,13 @@ export interface ScheduleConfig {
  */
 export const scheduleConfig: ScheduleConfig = {
   october: {
-    monthName: "October",
+    monthName: "Dussehra BootCamp",
     year: 2026,
     status: "Open for Registration",
     days: "Saturday & Sunday",
     sessionsCount: "8 Intensive Weekend Sessions (1 Month)",
-    targetAudience: "Grades 6–12 (Middle & High School)",
-    description: "Launch your innovation journey in the October cohort with dedicated mentor guidance and hands-on kit access at EDSOLS.",
+    targetAudience: "Ages 6+ & 12+ (Progressive Tracks)",
+    description: "Launch your innovation journey in the Dussehra BootCamp cohort with dedicated mentor guidance and hands-on kit access at EDSOLS.",
     morning: {
       label: "Morning Batch",
       timing: "09:30 AM – 12:30 PM",
@@ -52,13 +52,13 @@ export const scheduleConfig: ScheduleConfig = {
     },
   },
   november: {
-    monthName: "November",
+    monthName: "Special BootCamp",
     year: 2026,
     status: "Open for Registration",
     days: "Saturday & Sunday",
     sessionsCount: "8 Intensive Weekend Sessions (1 Month)",
-    targetAudience: "Grades 6–12 (Middle & High School)",
-    description: "Advance your robotics and AI skills in the November cohort with live capstone project building and demo day at EDSOLS.",
+    targetAudience: "Ages 6+ & 12+ (Progressive Tracks)",
+    description: "Advance your robotics and AI skills in the Special BootCamp cohort with live capstone project building and demo day at EDSOLS.",
     morning: {
       label: "Morning Batch",
       timing: "09:30 AM – 12:30 PM",

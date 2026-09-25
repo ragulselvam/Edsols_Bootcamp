@@ -82,7 +82,7 @@ export const HeroFullBackgroundAnimation: React.FC = () => {
       return colors[0];
     };
 
-    // Coding & Robotics tokens for Grades 6–12
+    // Coding & Robotics tokens for Ages 6+ & 12+
     const codeSymbols = ['{ }', '</>', '&&', '=>', 'fn()', '101', 'Bot', '⚡', 'AI', 'IoT', '++'];
 
     let particles: Particle[] = [];
