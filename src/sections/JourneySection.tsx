@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import { Compass, Cpu, Wifi, Rocket, CheckCircle2, Award, Calendar, ArrowRight } from 'lucide-react';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { Button } from '../components/common/Button';
-import { learningJourney, WeekJourney } from '../data/journey';
+import { technologyPlans, TechnologyTrackKey, WeekJourney } from '../data/journey';
 
 interface JourneySectionProps {
   onRegisterClick: () => void;
 }
 
 export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick }) => {
+  // Selected technology track: 'microbit' (default) | 'iot' | 'aiRobotics'
+  const [selectedTechnology, setSelectedTechnology] = useState<TechnologyTrackKey>('microbit');
   const [activeWeekIndex, setActiveWeekIndex] = useState(0);
-  const activeWeek: WeekJourney = learningJourney[activeWeekIndex];
+
+  const activePlan = technologyPlans[selectedTechnology] || technologyPlans.microbit;
+  const currentWeeks = activePlan.weeks;
+  const activeWeek: WeekJourney = currentWeeks[activeWeekIndex] || currentWeeks[0];
+
+  const handleSelectTechnology = (techKey: TechnologyTrackKey) => {
+    setSelectedTechnology(techKey);
+    // Keep activeWeekIndex within valid range for the newly selected track
+    setActiveWeekIndex((prev) => Math.min(prev, technologyPlans[techKey].weeks.length - 1));
+  };
 
   const getWeekIcon = (phase: string) => {
     switch (phase) {
@@ -29,7 +40,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick 
 
   return (
     <section id="journey" className="relative py-16 sm:py-24 md:py-32 bg-white">
-      {/* Dynamic Background */}
+      {/* Dynamic Background Glow */}
       <div className="absolute top-1/2 left-1/3 w-96 h-96 bg-rose-100/30 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,16 +49,40 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick 
           badgeVariant="blue"
           title="FOUR WEEKS."
           highlightText="FROM CURIOUS TO CREATOR."
-          subtitle="A carefully engineered 4-stage progression that takes school students from absolute beginners to confident builders of autonomous robots and AI systems."
+          subtitle="Explore our specialized 4-week curriculum paths for Micro:bit, IoT, and AI & Robotics. Each progressive track is engineered to take students from core foundations to confident capstone creators."
         />
+
+        {/* Centered Technology Filter Pills (Separate Standalone Buttons) */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-10 mx-auto">
+          {[
+            { id: 'microbit' as const, label: 'Micro:bit' },
+            { id: 'iot' as const, label: 'IoT' },
+            { id: 'aiRobotics' as const, label: 'AI & Robotics' },
+          ].map((tech) => {
+            const isSelected = selectedTechnology === tech.id;
+            return (
+              <button
+                key={tech.id}
+                onClick={() => handleSelectTechnology(tech.id)}
+                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-rose-600 text-white shadow-md shadow-rose-500/25 border border-rose-500'
+                    : 'bg-white text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 shadow-sm'
+                }`}
+              >
+                {tech.label}
+              </button>
+            );
+          })}
+        </div>
 
         {/* 4-Step Interactive Timeline Navigation Tabs */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-6 sm:mb-10">
-          {learningJourney.map((week, idx) => {
+          {currentWeeks.map((week, idx) => {
             const isActive = activeWeekIndex === idx;
             return (
               <button
-                key={week.weekNumber}
+                key={`${selectedTechnology}-${week.weekNumber}`}
                 onClick={() => setActiveWeekIndex(idx)}
                 className={`relative p-3.5 sm:p-5 rounded-2xl text-left transition-all duration-300 cursor-pointer overflow-hidden border ${
                   isActive
@@ -88,13 +123,16 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick 
         </div>
 
         {/* Active Week Deep-Dive Showcase Deck */}
-        <div className="rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-5 sm:p-8 md:p-10 shadow-edsols-card transition-all duration-500">
+        <div
+          key={`${selectedTechnology}-deck-${activeWeek.weekNumber}`}
+          className="rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 p-5 sm:p-8 md:p-10 shadow-edsols-card transition-all duration-500"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             {/* Left: Summary & Activities (7 cols) */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-rose-700 bg-rose-50 px-2.5 sm:px-3 py-1 rounded-full border border-rose-200">
-                  {activeWeek.weekNumber} · {activeWeek.phase} PHASE
+                  {activePlan.title} · {activeWeek.weekNumber} · {activeWeek.phase} PHASE
                 </span>
                 <span className="text-[11px] sm:text-xs font-mono text-slate-500 font-semibold flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5 text-rose-600" />
@@ -104,7 +142,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick 
 
               <div>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-                  {activeWeek.theme}
+                  {activeWeek.title}
                 </h3>
                 <p className="text-xs sm:text-sm font-bold text-rose-600 mt-1 font-mono">
                   {activeWeek.tagline}
@@ -120,7 +158,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ onRegisterClick 
                   Hands-on Lab Experiments:
                 </h4>
                 <div className="space-y-2 sm:space-y-2.5">
-                  {activeWeek.handsOnActivities.map((act, i) => (
+                  {(activeWeek.activities || activeWeek.handsOnActivities).map((act, i) => (
                     <div key={i} className="flex items-start gap-2.5 p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200">
                       <span className="h-5 w-5 rounded-lg bg-rose-100 text-rose-700 text-xs font-mono font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                         {i + 1}
