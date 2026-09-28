@@ -33,7 +33,7 @@ export const scheduleConfig: ScheduleConfig = {
     year: 2026,
     status: "Open for Registration",
     days: "Saturday & Sunday",
-    sessionsCount: "8 Intensive Weekend Sessions (1 Month)",
+    sessionsCount: "8 Intensive Weekend Sessions",
     targetAudience: "Ages 6+ & 12+ (Progressive Tracks)",
     description: "Launch your innovation journey in the Dussehra BootCamp cohort with dedicated mentor guidance and hands-on kit access at EDSOLS.",
     morning: {
@@ -56,7 +56,7 @@ export const scheduleConfig: ScheduleConfig = {
     year: 2026,
     status: "Open for Registration",
     days: "Saturday & Sunday",
-    sessionsCount: "8 Intensive Weekend Sessions (1 Month)",
+    sessionsCount: "8 Intensive Weekend Sessions",
     targetAudience: "Ages 6+ & 12+ (Progressive Tracks)",
     description: "Advance your robotics and AI skills in the Special BootCamp cohort with live capstone project building and demo day at EDSOLS.",
     morning: {

@@ -25,7 +25,7 @@ export const OverviewSection: React.FC = () => {
         <SectionHeader
           badgeText="Bootcamp Overview"
           badgeVariant="blue"
-          title="One Month. Three Technologies."
+          title="Three Technologies."
           highlightText="Real Projects."
           subtitle="A comprehensive, weekend-based practical technology program designed specifically for young innovators by EDSOLS. Students learn through direct experimentation, guided engineering builds, and creative challenge sprints."
         />

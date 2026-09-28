@@ -63,7 +63,7 @@ export const bootcampData: BootcampInfo = {
   stats: [
     {
       number: "01",
-      title: "1 Month",
+      title: "8 Sessions",
       subtitle: "Hands-on Technology Learning",
       detail: "8 intensive hands-on weekend sessions covering the full spectrum of modern hardware, IoT & Edge AI.",
       iconName: "Calendar",
@@ -118,7 +118,7 @@ export const bootcampData: BootcampInfo = {
     },
     {
       question: "How are the Dussehra BootCamp and Special BootCamp batches different?",
-      answer: "Both Dussehra BootCamp and Special BootCamp batches cover the same complete 1-month curriculum. Students can choose whichever cohort fits their academic and holiday schedule best. Both cohorts are currently OPEN for registration.",
+      answer: "Both Dussehra BootCamp and Special BootCamp batches cover the same complete hands-on curriculum. Students can choose whichever cohort fits their academic and holiday schedule best. Both cohorts are currently OPEN for registration.",
       category: "Registration",
     },
   ],

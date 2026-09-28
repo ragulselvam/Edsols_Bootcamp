@@ -152,7 +152,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
 
               <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-slate-200">
                 <span className="text-[11px] sm:text-xs font-mono uppercase text-slate-500 font-bold">Format</span>
-                <span className="text-xs sm:text-sm font-bold text-slate-900">1 Month · Weekend Sessions</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-900">8 Weekend Sessions</span>
               </div>
 
               <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-slate-200">
