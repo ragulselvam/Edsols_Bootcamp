@@ -26,10 +26,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
           {/* LEFT COLUMN: Main Headline, Subhead, Description & Key Badges */}
           <div className="lg:col-span-5 flex flex-col justify-center text-left">
             <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-slate-900 leading-[1.08] font-display">
-              BUILD.{' '}
-              <span className="gradient-text-edsols block mt-1 sm:mt-2">
-                CODE.
-              </span>
+              BUILD. <span className="gradient-text-edsols">CODE.</span>
             </h1>
 
             <p className="mt-3 sm:mt-4 text-lg xs:text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
