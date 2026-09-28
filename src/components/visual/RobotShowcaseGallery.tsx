@@ -135,6 +135,24 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
     }
   };
 
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    if (diff < -40) {
+      handleNext();
+    } else if (diff > 40) {
+      handlePrev();
+    }
+    setTouchStartX(null);
+  };
+
   return (
     <div
       className={`w-full max-w-[680px] mx-auto flex flex-col items-center select-none ${className}`}
@@ -146,8 +164,12 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
       {/* =================================================================== */}
       <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
         
-        {/* LEFT / CENTER: LARGE FEATURED IMAGE CARD (approx 7.5 cols on desktop) */}
-        <div className="md:col-span-8 flex flex-col justify-between rounded-3xl bg-white/95 backdrop-blur-sm border-2 border-slate-200/90 shadow-[0_12px_36px_-10px_rgba(15,23,42,0.08)] p-5 sm:p-6 transition-all duration-300 relative overflow-hidden">
+        {/* LEFT / CENTER: LARGE FEATURED IMAGE CARD (Full width on mobile, approx 8 cols on desktop) */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="w-full md:col-span-8 flex flex-col justify-between rounded-3xl bg-white/95 backdrop-blur-sm border-2 border-slate-200/90 shadow-[0_12px_36px_-10px_rgba(15,23,42,0.08)] p-5 sm:p-6 transition-all duration-300 relative overflow-hidden"
+        >
           
           {/* Subtle Ambient Radial Lighting */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-radial from-rose-100/40 via-sky-50/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
@@ -202,8 +224,8 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
           </div>
         </div>
 
-        {/* RIGHT: THUMBNAIL CARDS STACK (approx 4 cols on desktop) */}
-        <div className="md:col-span-4 flex md:flex-col gap-2 overflow-x-auto md:overflow-y-auto md:max-h-[460px] pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+        {/* RIGHT: THUMBNAIL CARDS STACK (hidden on mobile, visible on tablet/desktop md+) */}
+        <div className="hidden md:flex md:col-span-4 md:flex-col gap-2 md:overflow-y-auto md:max-h-[460px] pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
           {showcaseItems.map((item, index) => {
             const isActive = index === currentIndex;
             return (
