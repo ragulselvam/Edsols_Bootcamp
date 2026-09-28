@@ -73,7 +73,7 @@ export const TracksSection: React.FC<TracksSectionProps> = ({
                 {/* Hardware Kit Association */}
                 <div
                   onClick={() => onHardwareKitSelect(track.hardwareKitId)}
-                  className="mt-5 p-3 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-300 hover:bg-white flex items-center gap-3 transition-colors cursor-pointer shadow-sm"
+                  className="mt-5 p-3 rounded-2xl bg-white border border-slate-200 hover:border-rose-300 flex items-center gap-3 transition-colors cursor-pointer shadow-sm"
                 >
                   <img
                     src={track.hardwareImageUrl}

@@ -40,7 +40,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
             {/* Key Specs Pill Matrix */}
             <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
               {/* Card 1: Weekend Program */}
-              <div className="bg-white/95 p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-rose-300 hover:shadow-md transition-all">
+              <div className="bg-white p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-rose-300 hover:shadow-md transition-all">
                 <div className="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 flex-shrink-0">
                   <Calendar className="w-4 h-4 text-rose-600 stroke-[2.5]" />
                 </div>
@@ -51,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
               </div>
 
               {/* Card 2: Ages 6+ & 12+ */}
-              <div className="bg-white/95 p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-cyan-300 hover:shadow-md transition-all">
+              <div className="bg-white p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-cyan-300 hover:shadow-md transition-all">
                 <div className="p-2 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600 flex-shrink-0">
                   <Users2 className="w-4 h-4 text-cyan-600 stroke-[2.5]" />
                 </div>
@@ -62,7 +62,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
               </div>
 
               {/* Card 3: Morning & Afternoon Batches */}
-              <div className="bg-white/95 p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-amber-300 hover:shadow-md transition-all">
+              <div className="bg-white p-3.5 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-3 hover:border-amber-300 hover:shadow-md transition-all">
                 <div className="p-2 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex-shrink-0">
                   <Sun className="w-4 h-4 text-amber-600 stroke-[2.5]" />
                 </div>

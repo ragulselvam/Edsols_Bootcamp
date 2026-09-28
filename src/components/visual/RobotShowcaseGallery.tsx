@@ -168,12 +168,8 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="w-full md:col-span-8 flex flex-col justify-between rounded-3xl bg-white/95 backdrop-blur-sm border-2 border-slate-200/90 shadow-[0_12px_36px_-10px_rgba(15,23,42,0.08)] p-5 sm:p-6 transition-all duration-300 relative overflow-hidden"
+          className="w-full md:col-span-8 flex flex-col justify-between rounded-3xl bg-white border-2 border-slate-200/90 shadow-[0_12px_36px_-10px_rgba(15,23,42,0.08)] p-5 sm:p-6 transition-all duration-300 relative overflow-hidden"
         >
-          
-          {/* Subtle Ambient Radial Lighting */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-radial from-rose-100/40 via-sky-50/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-
           {/* Top Header: Category Badge */}
           <div className="flex items-center justify-between mb-2">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-cyan-50/80 border border-cyan-100/90 text-cyan-700 text-xs font-bold shadow-xs">
@@ -187,12 +183,12 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
           </div>
 
           {/* Center: FIXED-HEIGHT Visual Image Stage (object-contain ensures zero layout shift) */}
-          <div className="relative w-full h-[240px] sm:h-[270px] flex items-center justify-center py-2 px-3 overflow-hidden">
+          <div className="relative w-full h-[240px] sm:h-[270px] flex items-center justify-center py-2 px-3 overflow-hidden bg-white">
             <img
               key={currentItem.id}
               src={currentItem.image}
               alt={`${currentItem.brand} ${currentItem.highlightTitle}`}
-              className="max-h-full max-w-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all duration-500 ease-out transform"
+              className="max-h-full max-w-full object-contain transition-all duration-500 ease-out transform"
               loading="eager"
             />
           </div>
@@ -237,7 +233,7 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
                 className={`flex-shrink-0 w-[140px] md:w-full flex items-center gap-2.5 p-2 rounded-2xl text-left transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'bg-rose-50/70 border-2 border-rose-400 shadow-sm scale-[1.02]'
-                    : 'bg-white/90 hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300'
+                    : 'bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300'
                 }`}
               >
                 {/* Thumbnail Square */}
