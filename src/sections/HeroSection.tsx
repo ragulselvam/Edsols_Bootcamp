@@ -164,34 +164,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* =================================================================== */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-auto">
         <div className="pt-3 sm:pt-3.5 pb-1 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-3 text-xs font-bold text-slate-700">
-          
-          {/* Left: Avatar Cluster + Count */}
-          <div className="flex items-center gap-2.5">
-            <div className="flex -space-x-2 overflow-hidden">
-              <img
-                className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover"
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-                alt="Student builder"
-              />
-              <img
-                className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
-                alt="Student builder"
-              />
-              <img
-                className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
-                alt="Student builder"
-              />
-            </div>
-            <div>
-              <div className="text-xs sm:text-sm font-black text-slate-900 leading-tight">2,000+</div>
-              <div className="text-[10px] font-semibold text-slate-500">Students Building the Future</div>
-            </div>
-          </div>
-
-          {/* Middle: 4 Key Pillars */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-7 text-[11px] xl:text-xs">
+          {/* Key Feature Pillars */}
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 xl:gap-8 text-[11px] sm:text-xs">
             <div className="flex items-center gap-1.5">
               <GraduationCap className="w-3.5 h-3.5 text-rose-600 stroke-[2.5]" />
               <span>Hands-on Learning</span>
