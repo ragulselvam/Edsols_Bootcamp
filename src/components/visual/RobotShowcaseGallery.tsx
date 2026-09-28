@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Camera, Sparkles, Cpu, Layers } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Camera,
+  Sparkles,
+  Cpu,
+  Layers,
+  Bot,
+  Radio,
+} from 'lucide-react';
 
 export interface ShowcaseItem {
   id: string;
@@ -13,17 +22,17 @@ export interface ShowcaseItem {
   shortCategory: string;
 }
 
-const showcaseItems: ShowcaseItem[] = [
+export const showcaseItems: ShowcaseItem[] = [
   {
-    id: 'ai-robot-lab',
-    image: '/Header_img/hero_robot_ai_lab.jpg',
-    badgeText: 'Autonomous AI Platform',
-    brand: 'NVIDIA & EDSOLS',
-    highlightTitle: 'Edge AI Robotic System',
-    subtitle: 'Embedded Computer Vision, Neural Network Telemetry & 6-DOF Manipulation',
-    tags: ['Edge AI', 'Computer Vision', 'Neural Networks', 'LiDAR Telemetry'],
-    shortName: 'AI Robot',
-    shortCategory: 'Edge AI Lab',
+    id: 'robodog',
+    image: '/Header_img/Robotic_Dog_Stage.jpg',
+    badgeText: 'Quadruped Locomotion',
+    brand: 'Bionic',
+    highlightTitle: 'Robot Dog',
+    subtitle: 'Bio-Inspired Dynamic Gait & Balance Control',
+    tags: ['12-DOF Servos', 'Gait Planning', 'Dynamic Balance'],
+    shortName: 'RoboDog',
+    shortCategory: 'Bionic Pet',
   },
   {
     id: 'jetbot',
@@ -31,7 +40,7 @@ const showcaseItems: ShowcaseItem[] = [
     badgeText: 'AI Vision Robot',
     brand: 'NVIDIA',
     highlightTitle: 'JetBot',
-    subtitle: 'AI Vision & Autonomous Robotics',
+    subtitle: 'Computer Vision & Autonomous Obstacle Avoidance',
     tags: ['Computer Vision', 'AI', 'Autonomous Robotics'],
     shortName: 'JetBot',
     shortCategory: 'AI Vision',
@@ -49,32 +58,21 @@ const showcaseItems: ShowcaseItem[] = [
   },
   {
     id: 'dofbot',
-    image: '/Header_img/dofbot-robotic-arm.jpg',
+    image: '/Header_img/dofbot_3d_stage.jpg',
     badgeText: '6-Axis Robotic Arm',
-    brand: 'DOFBOT',
-    highlightTitle: 'AI Arm',
+    brand: 'DOBOT',
+    highlightTitle: 'Robotic Arm',
     subtitle: 'Precision Kinematics & Computer Vision Manipulation',
-    tags: ['6-DOF Servos', 'OpenCV', 'Inverse Kinematics'],
-    shortName: 'DOFBOT',
+    tags: ['6-DOF Servos', 'OpenCV Vision', 'Inverse Kinematics'],
+    shortName: 'DOBOT',
     shortCategory: 'Robotic Arm',
-  },
-  {
-    id: 'robodog',
-    image: '/Header_img/Robotic_Dog.jpg',
-    badgeText: 'Quadruped Locomotion',
-    brand: 'Bionic',
-    highlightTitle: 'Robot Dog',
-    subtitle: 'Bio-Inspired Dynamic Gait & Balance Control',
-    tags: ['12-DOF Servos', 'Gait Planning', 'Dynamic Balance'],
-    shortName: 'RoboDog',
-    shortCategory: 'Bionic Pet',
   },
   {
     id: 'smartcar',
     image: '/Header_img/Smart_Car.png',
     badgeText: 'STEM Autonomous Rover',
     brand: 'Micro:bit',
-    highlightTitle: 'Tiny:bit',
+    highlightTitle: 'Smart Car',
     subtitle: 'Ultrasonic Obstacle Avoidance & Line Tracking',
     tags: ['Micro:bit V2', 'Ultrasonic Telemetry', 'RGB Lighting'],
     shortName: 'Smart Car',
@@ -102,21 +100,34 @@ const showcaseItems: ShowcaseItem[] = [
     shortName: 'Smart Access',
     shortCategory: 'IoT & Security',
   },
+  {
+    id: 'ai-robot-lab',
+    image: '/Header_img/hero_robot_ai_lab.jpg',
+    badgeText: 'Autonomous AI Platform',
+    brand: 'NVIDIA & EDSOLS',
+    highlightTitle: 'Edge AI Robot',
+    subtitle: 'Embedded Computer Vision & Neural Network Telemetry',
+    tags: ['Edge AI', 'Neural Networks', 'LiDAR Telemetry'],
+    shortName: 'AI Robot',
+    shortCategory: 'Edge AI Lab',
+  },
 ];
 
 export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
   className = '',
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
 
-  // Auto-switch image every 5 seconds (5000ms), continuously looping forever
+  // Auto-switch image every 5 seconds, continuously looping
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % showcaseItems.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, isPaused]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + showcaseItems.length) % showcaseItems.length);
@@ -135,14 +146,18 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
   const renderBadgeIcon = (id: string) => {
     switch (id) {
       case 'jetbot':
-        return <Camera className="w-4 h-4 text-cyan-600" />;
+        return <Camera className="w-3.5 h-3.5 text-cyan-600" />;
       case 'dofbot':
-        return <Sparkles className="w-4 h-4 text-rose-600" />;
+        return <Sparkles className="w-3.5 h-3.5 text-rose-600" />;
       case 'jetracer':
       case 'robodog':
-        return <Cpu className="w-4 h-4 text-indigo-600" />;
+        return <Cpu className="w-3.5 h-3.5 text-indigo-600" />;
+      case 'smartcar':
+        return <Bot className="w-3.5 h-3.5 text-blue-600" />;
+      case 'smartdoor':
+        return <Radio className="w-3.5 h-3.5 text-emerald-600" />;
       default:
-        return <Layers className="w-4 h-4 text-amber-600" />;
+        return <Layers className="w-3.5 h-3.5 text-amber-600" />;
     }
   };
 
@@ -166,63 +181,118 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
 
   return (
     <div
-      className={`w-full max-w-[680px] mx-auto flex flex-col items-center select-none ${className}`}
+      className={`w-full max-w-[820px] mx-auto select-none ${className}`}
       role="region"
-      aria-label="Robotics Hardware Photo Collection"
+      aria-label="Robotics Hardware Showcase Gallery"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* =================================================================== */}
-      {/* MAIN GALLERY CONTAINER: FEATURED CARD + THUMBNAILS STACK            */}
+      {/* MAIN 2-COLUMN STAGE: FEATURED CARD (LEFT) + THUMBNAILS LIST (RIGHT) */}
       {/* =================================================================== */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-4 items-stretch">
         
-        {/* LEFT / CENTER: LARGE FEATURED IMAGE CARD (Full width on mobile, approx 8 cols on desktop) */}
+        {/* ================================================================= */}
+        {/* LEFT / CENTER: MAIN FEATURED ROBOT CARD (approx 7 cols on desktop) */}
+        {/* ================================================================= */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="w-full md:col-span-8 flex flex-col justify-between rounded-3xl bg-white border-2 border-slate-200/90 shadow-[0_12px_36px_-10px_rgba(15,23,42,0.08)] p-5 sm:p-6 transition-all duration-300 relative overflow-hidden"
+          className="md:col-span-7 lg:col-span-7 flex flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white border-2 border-slate-200/90 shadow-[0_16px_40px_-12px_rgba(15,23,42,0.09)] p-4 sm:p-6 transition-all duration-300 relative overflow-hidden group"
         >
-          {/* Top Header: Category Badge */}
-          <div className="flex items-center justify-between mb-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-cyan-50/80 border border-cyan-100/90 text-cyan-700 text-xs font-bold shadow-xs">
+          {/* Subtle Ambient Radial Lighting */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-radial from-rose-100/50 via-pink-50/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+
+          {/* Card Top Header: Category Badge & Index Counter */}
+          <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50/90 border border-cyan-100 text-cyan-700 text-xs font-bold shadow-xs">
               {renderBadgeIcon(currentItem.id)}
               <span>{currentItem.badgeText}</span>
             </div>
 
-            <span className="text-[11px] font-mono font-bold text-slate-400">
-              0{currentIndex + 1} / 0{showcaseItems.length}
+            <span className="text-xs font-mono font-bold text-slate-400">
+              {String(currentIndex + 1).padStart(2, '0')} / {String(showcaseItems.length).padStart(2, '0')}
             </span>
           </div>
 
-          {/* Center: FIXED-HEIGHT Visual Image Stage (object-contain ensures zero layout shift) */}
-          <div className="relative w-full h-[240px] sm:h-[270px] flex items-center justify-center py-2 px-3 overflow-hidden bg-white">
+          {/* Visual Image Stage with Navigation Chevrons */}
+          <div className="relative w-full h-[230px] xs:h-[260px] sm:h-[290px] md:h-[300px] flex items-center justify-center p-2 overflow-hidden">
+            {/* Left Chevron Button */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Previous hardware"
+              className="absolute left-1 xs:left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 border border-slate-200 shadow-md hover:border-rose-400 hover:text-rose-600 hover:scale-105 active:scale-95 flex items-center justify-center text-slate-700 transition-all cursor-pointer backdrop-blur-xs"
+            >
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
+            </button>
+
+            {/* Centered Robot Image */}
             <img
               key={currentItem.id}
               src={currentItem.image}
               alt={`${currentItem.brand} ${currentItem.highlightTitle}`}
-              className="max-h-full max-w-full object-contain transition-all duration-500 ease-out transform"
+              className="max-h-full max-w-full object-contain filter drop-shadow-[0_10px_24px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out transform"
               loading="eager"
             />
+
+            {/* Right Chevron Button */}
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Next hardware"
+              className="absolute right-1 xs:right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 border border-slate-200 shadow-md hover:border-rose-400 hover:text-rose-600 hover:scale-105 active:scale-95 flex items-center justify-center text-slate-700 transition-all cursor-pointer backdrop-blur-xs"
+            >
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
+            </button>
           </div>
 
-          {/* Bottom Info: Title, Subtitle, and Feature Tags */}
-          <div className="mt-2 pt-3 border-t border-slate-100 flex flex-col gap-1.5">
-            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-display">
+          {/* Dot Indicators */}
+          <div className="flex items-center justify-center gap-1.5 my-1.5">
+            {showcaseItems.map((item, index) => {
+              const isActive = index === currentIndex;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleSelect(index)}
+                  aria-label={`Go to ${item.brand} ${item.highlightTitle}`}
+                  className={`transition-all duration-300 cursor-pointer rounded-full ${
+                    isActive
+                      ? 'w-6 h-2 bg-rose-500 shadow-xs'
+                      : 'w-2 h-2 bg-slate-200 hover:bg-rose-200'
+                  }`}
+                />
+              );
+            })}
+          </div>
+
+          {/* Bottom Information: Live Project Tag, Title, Subtitle, Feature Pills */}
+          <div className="pt-2.5 sm:pt-3 border-t border-slate-100 flex flex-col gap-1.5">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-rose-600">
+                LIVE PROJECT
+              </span>
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 font-display">
               {currentItem.brand}{' '}
-              <span className="gradient-text-accent">
+              <span className="text-rose-600">
                 {currentItem.highlightTitle}
               </span>
             </h3>
 
-            <p className="text-xs sm:text-sm font-bold text-slate-600 leading-snug">
+            <p className="text-xs sm:text-sm font-semibold text-slate-600 leading-snug">
               {currentItem.subtitle}
             </p>
 
             {/* Feature Tag Pills */}
-            <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+            <div className="flex flex-wrap items-center gap-1.5 mt-1">
               {currentItem.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100/80 text-slate-700 border border-slate-200/60"
+                  className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200/80"
                 >
                   {tag}
                 </span>
@@ -231,8 +301,10 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
           </div>
         </div>
 
-        {/* RIGHT: THUMBNAIL CARDS STACK (hidden on mobile, visible on tablet/desktop md+) */}
-        <div className="hidden md:flex md:col-span-4 md:flex-col gap-2 md:overflow-y-auto md:max-h-[460px] pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+        {/* ================================================================= */}
+        {/* RIGHT: THUMBNAILS LIST (approx 5 cols on desktop, scrollable)     */}
+        {/* ================================================================= */}
+        <div className="md:col-span-5 lg:col-span-5 flex md:flex-col gap-2 overflow-x-auto md:overflow-y-auto max-h-[480px] pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
           {showcaseItems.map((item, index) => {
             const isActive = index === currentIndex;
             return (
@@ -241,85 +313,52 @@ export const RobotShowcaseGallery: React.FC<{ className?: string }> = ({
                 type="button"
                 onClick={() => handleSelect(index)}
                 aria-label={`Show ${item.brand} ${item.highlightTitle}`}
-                className={`flex-shrink-0 w-[140px] md:w-full flex items-center gap-2.5 p-2 rounded-2xl text-left transition-all duration-200 cursor-pointer ${
+                className={`flex-shrink-0 w-[140px] md:w-full flex items-center justify-between p-2 sm:p-2.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-rose-50/70 border-2 border-rose-400 shadow-sm scale-[1.02]'
-                    : 'bg-white hover:bg-slate-50 border border-slate-200/80 hover:border-slate-300'
+                    ? 'bg-rose-50/90 border-2 border-rose-400 shadow-sm'
+                    : 'bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-slate-300'
                 }`}
               >
-                {/* Thumbnail Square */}
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-100 p-1 flex items-center justify-center flex-shrink-0 shadow-xs">
-                  <img
-                    src={item.image}
-                    alt=""
-                    aria-hidden="true"
-                    className="max-h-full max-w-full object-contain"
-                    loading="lazy"
-                  />
+                {/* Left Thumbnail + Titles */}
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-slate-100 p-1 flex items-center justify-center flex-shrink-0 shadow-xs">
+                    <img
+                      src={item.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="max-h-full max-w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="flex flex-col min-w-0">
+                    <span
+                      className={`text-xs sm:text-sm font-black truncate leading-tight ${
+                        isActive ? 'text-rose-600' : 'text-slate-900'
+                      }`}
+                    >
+                      {item.shortName}
+                    </span>
+                    <span className="text-[10px] font-semibold text-slate-500 truncate mt-0.5">
+                      {item.shortCategory}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Thumbnail Labels */}
-                <div className="flex flex-col min-w-0">
-                  <span
-                    className={`text-xs font-black truncate leading-tight ${
-                      isActive ? 'text-rose-600' : 'text-slate-800'
-                    }`}
-                  >
-                    {item.shortName}
-                  </span>
-                  <span className="text-[10px] font-semibold text-slate-600 truncate mt-0.5">
-                    {item.shortCategory}
-                  </span>
+                {/* Right Arrow Circle */}
+                <div
+                  className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ml-1.5 transition-all ${
+                    isActive
+                      ? 'bg-rose-500 text-white shadow-xs'
+                      : 'text-slate-400 group-hover:text-slate-600'
+                  }`}
+                >
+                  <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
                 </div>
               </button>
             );
           })}
         </div>
-      </div>
-
-      {/* =================================================================== */}
-      {/* BOTTOM CONTROLS: PREV / NEXT BUTTONS + DOT INDICATORS               */}
-      {/* =================================================================== */}
-      <div className="flex items-center justify-center gap-3 mt-4">
-        {/* Previous Button */}
-        <button
-          type="button"
-          onClick={handlePrev}
-          aria-label="Previous product"
-          className="w-8 h-8 rounded-full bg-white border border-slate-200 shadow-sm hover:border-rose-300 hover:text-rose-600 hover:shadow-md flex items-center justify-center text-slate-700 transition-all cursor-pointer active:scale-95"
-        >
-          <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
-        </button>
-
-        {/* Dot Indicators */}
-        <div className="flex items-center gap-1.5 px-2">
-          {showcaseItems.map((item, index) => {
-            const isActive = index === currentIndex;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => handleSelect(index)}
-                aria-label={`Go to ${item.brand} ${item.highlightTitle}`}
-                className={`transition-all duration-300 cursor-pointer rounded-full ${
-                  isActive
-                    ? 'w-6 h-2 bg-rose-500 shadow-xs'
-                    : 'w-2 h-2 bg-rose-200 hover:bg-rose-300'
-                }`}
-              />
-            );
-          })}
-        </div>
-
-        {/* Next Button */}
-        <button
-          type="button"
-          onClick={handleNext}
-          aria-label="Next product"
-          className="w-8 h-8 rounded-full bg-white border border-slate-200 shadow-sm hover:border-rose-300 hover:text-rose-600 hover:shadow-md flex items-center justify-center text-slate-700 transition-all cursor-pointer active:scale-95"
-        >
-          <ChevronRight className="w-4 h-4 stroke-[2.5]" />
-        </button>
       </div>
     </div>
   );
