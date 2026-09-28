@@ -38,15 +38,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* =================================================================== */}
       {/* BACKGROUND GRAPHICS & ACCENTS                                       */}
       {/* =================================================================== */}
-      {/* Top-Left Hanging 3D Robotic Arm Graphic */}
-      <div className="absolute -top-4 -left-6 sm:-top-8 sm:-left-8 w-32 xs:w-40 sm:w-56 md:w-64 lg:w-72 pointer-events-none z-10 select-none opacity-90 sm:opacity-100">
-        <img
-          src="/Header_img/robot_arm_claw.jpg"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-contain filter drop-shadow-2xl rotate-3"
-        />
-      </div>
 
       {/* Top-Right Cyber Glowing Ring Arc & Dot Matrix */}
       <div className="absolute top-0 right-0 w-[420px] sm:w-[600px] h-[420px] sm:h-[600px] pointer-events-none -z-10 overflow-hidden">
