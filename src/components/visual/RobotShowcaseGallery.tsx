@@ -15,6 +15,17 @@ export interface ShowcaseItem {
 
 const showcaseItems: ShowcaseItem[] = [
   {
+    id: 'ai-robot-lab',
+    image: '/Header_img/hero_robot_ai_lab.jpg',
+    badgeText: 'Autonomous AI Platform',
+    brand: 'NVIDIA & EDSOLS',
+    highlightTitle: 'Edge AI Robotic System',
+    subtitle: 'Embedded Computer Vision, Neural Network Telemetry & 6-DOF Manipulation',
+    tags: ['Edge AI', 'Computer Vision', 'Neural Networks', 'LiDAR Telemetry'],
+    shortName: 'AI Robot',
+    shortCategory: 'Edge AI Lab',
+  },
+  {
     id: 'jetbot',
     image: '/Header_img/Picture1.png',
     badgeText: 'AI Vision Robot',

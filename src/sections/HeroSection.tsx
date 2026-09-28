@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Users2, Sun } from 'lucide-react';
+import { Calendar, Users2, Sun, ArrowRight } from 'lucide-react';
 import { RobotShowcaseGallery } from '../components/visual/RobotShowcaseGallery';
 // Preserved robot animation components for future reuse:
 // import { RobotAssemblyPuzzle } from '../components/visual/RobotAssemblyPuzzle';
@@ -11,7 +11,10 @@ interface HeroSectionProps {
   onKitSelect?: (kitId: string) => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = () => {
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  onRegisterClick,
+  onExploreClick,
+}) => {
   return (
     <section
       id="hero"
@@ -25,17 +28,51 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-center">
           {/* LEFT COLUMN: Main Headline, Subhead, Description & Key Badges */}
           <div className="lg:col-span-5 flex flex-col justify-center text-left">
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-slate-900 leading-[1.08] font-display">
-              BUILD. <span className="gradient-text-edsols">CODE.</span>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.08] font-display">
+              BUILD THE TECHNOLOGY{' '}
+              <span className="gradient-text-edsols block mt-1 sm:mt-1.5">
+                OF TOMORROW.
+              </span>
             </h1>
 
-            <p className="mt-3 sm:mt-4 text-lg xs:text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            {/* Core Pillars */}
+            <div className="mt-3 sm:mt-4 flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm font-bold text-rose-600">
+              <span>AI</span>
+              <span className="text-slate-300">•</span>
+              <span>ROBOTICS</span>
+              <span className="text-slate-300">•</span>
+              <span>IOT</span>
+              <span className="text-slate-300">•</span>
+              <span>INNOVATION</span>
+            </div>
+
+            <p className="mt-2 text-lg xs:text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
               Intelligence at the Edge for Young Innovators
             </p>
 
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-slate-700 font-bold leading-relaxed max-w-2xl">
-              A hands-on <span className="text-rose-600 font-black">Robotics, IoT & AI Bootcamp</span> by EDSOLS, with progressive learning tracks for ages 6+ and 12+. Explore practical engineering through real hardware, Micro:bit, IoT, computer vision, smart automation, AI and robotics.
+            <p className="mt-3 text-sm sm:text-base md:text-lg text-slate-700 font-bold leading-relaxed max-w-2xl">
+              Learn by building real autonomous systems, computer vision, smart automation, and IoT hardware. A hands-on <span className="text-rose-600 font-black">Robotics, IoT & AI Bootcamp</span> by EDSOLS for students to invent their future.
             </p>
+
+            {/* Primary Action Buttons */}
+            <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={onRegisterClick}
+                className="px-5 sm:px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-rose-500/25 transition-all cursor-pointer flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>Explore Bootcamps</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              </button>
+
+              <button
+                type="button"
+                onClick={onExploreClick}
+                className="px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs sm:text-sm border-2 border-slate-200 hover:border-slate-300 shadow-sm transition-all cursor-pointer"
+              >
+                View Hardware Kits
+              </button>
+            </div>
 
             {/* Key Specs Pill Matrix */}
             <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
