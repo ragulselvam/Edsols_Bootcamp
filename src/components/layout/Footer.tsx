@@ -115,10 +115,6 @@ export const Footer: React.FC = () => {
           <p>© {currentYear} EDSOLS Innovations Private Limited. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span>Weekend Innovation Program</span>
-            <span>•</span>
-            <span>Ages 6+ & 12+</span>
-            <span>•</span>
-            <span className="text-rose-400">Robotics · IoT · AI</span>
           </div>
         </div>
       </div>
