@@ -39,7 +39,7 @@ export const bootcampData: BootcampInfo = {
   brandName: "EDSOLS",
   brandSubname: "INNOVATIONS",
   tagline: "Robotics | IoT | AI",
-  heroHeadline: "BUILD. CODE. CREATE.",
+  heroHeadline: "BUILD. CODE.",
   heroHighlight: "Intelligence at the Edge for Young Innovators",
   heroSubtitle: "A hands-on Robotics, IoT & AI Bootcamp by EDSOLS, with progressive learning tracks for ages 6+ and 12+. Explore practical engineering through real hardware, Micro:bit, IoT, computer vision, smart automation, AI and robotics.",
   targetAudience: "Ages 6+ & 12+ (Progressive Learning Tracks)",
